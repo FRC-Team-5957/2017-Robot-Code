@@ -31,6 +31,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
     public static DriveTrain driveTrain = new DriveTrain();
+    public static Vision vision = new Vision();
 
     Command autonomousCommand;
     Command teleopCommand;
