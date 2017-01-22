@@ -17,19 +17,14 @@ public class OI {
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
     // number it is.
-    public Joystick leftStick;
-    public Joystick rightStick;
-    Button tankButton;
-    Button arcadeButton;
-    Button brakeButton;
+
+	public Joystick leftStick = new Joystick(0);
+	public Joystick rightStick = new Joystick(1);
+    Button tankButton   = new JoystickButton(leftStick, 11);
+    Button arcadeButton = new JoystickButton(leftStick, 12);
+    Button brakeButton  = new JoystickButton(leftStick, 9);
     
     public OI() {
-    	leftStick = new Joystick(1);
-    	rightStick = new Joystick(2);
-        tankButton   = new JoystickButton(leftStick, 11);
-        arcadeButton = new JoystickButton(leftStick, 12);
-        brakeButton  = new JoystickButton(leftStick, 9);
-        
         tankButton.whenPressed(new DriveTrainTankDrive());
         arcadeButton.whenPressed(new DriveTrainArcadeDrive());
         brakeButton.whenPressed(new DriveTrainBrake());

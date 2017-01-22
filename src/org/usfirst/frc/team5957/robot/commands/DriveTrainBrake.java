@@ -10,7 +10,6 @@ public class DriveTrainBrake extends Command {
 
     public DriveTrainBrake() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	super("DriveTrainBrake");
     	requires(Robot.driveTrain);
     }

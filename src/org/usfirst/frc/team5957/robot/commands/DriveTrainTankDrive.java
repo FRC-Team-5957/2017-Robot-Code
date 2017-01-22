@@ -11,6 +11,7 @@ public class DriveTrainTankDrive extends Command {
 
     public DriveTrainTankDrive() {
         // Use requires() here to declare subsystem dependencies
+    	super("DriveTrainTankDrive");
     	requires(Robot.driveTrain);
     }
 
