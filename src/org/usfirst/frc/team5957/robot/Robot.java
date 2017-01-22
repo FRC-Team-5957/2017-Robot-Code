@@ -1,6 +1,9 @@
 
 package org.usfirst.frc.team5957.robot;
 
+import org.usfirst.frc.team5957.robot.commands.DriveTrainArcadeDrive;
+import org.usfirst.frc.team5957.robot.commands.DriveTrainBrake;
+import org.usfirst.frc.team5957.robot.commands.DriveTrainTankDrive;
 import org.usfirst.frc.team5957.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -37,6 +40,11 @@ public class Robot extends IterativeRobot {
         //chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+        
+        SmartDashboard.putData("Arcade Drive", new DriveTrainArcadeDrive());
+        SmartDashboard.putData("Tank Drive", new DriveTrainTankDrive());
+        SmartDashboard.putData("Brake", new DriveTrainBrake());
+        
     }
 	
 	/**
