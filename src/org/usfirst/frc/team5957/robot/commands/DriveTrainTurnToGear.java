@@ -14,7 +14,7 @@ public class DriveTrainTurnToGear extends Command {
         // eg. requires(chassis);
     	super("DriveTrainTurnToGear");
     	requires(Robot.driveTrain);
-    	requires(Robot.vision);
+    	// Does not require vision
     }
 
     // Called just before this Command runs the first time
