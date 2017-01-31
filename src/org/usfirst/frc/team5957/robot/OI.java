@@ -19,12 +19,14 @@ public class OI {
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
     // number it is.
+	
+    public String joystickType = "gamepad"; // "gamepad" or "flightStick"
 
 	public Joystick leftStick = new Joystick(0);
 	public Joystick rightStick = new Joystick(1);
-    Button tankButton   = new JoystickButton(leftStick, 11);
-    Button arcadeButton = new JoystickButton(leftStick, 12);
-    Button brakeButton  = new JoystickButton(leftStick, 9);
+    Button tankButton   = new JoystickButton(leftStick, 3);
+    Button arcadeButton = new JoystickButton(leftStick, 4);
+    Button brakeButton  = new JoystickButton(leftStick, 5);
     
     // Sensors
     public Gyro gyro;

@@ -32,6 +32,7 @@ public class Robot extends IterativeRobot {
     
     Command teleopCommand;
     Command autonomousCommand;
+    SendableChooser<String> joystick;
     SendableChooser<Command> autoChooser;
     SendableChooser<Command> teleChooser;
 
@@ -43,10 +44,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         autoChooser = new SendableChooser<Command>();
         teleChooser = new SendableChooser<Command>();
-        
         driveTrain.init();
         
-
         //autoChooser.addDefault("Default Auto", new ExampleCommand());
 //        autoChooser.addObject("My Auto", new MyAutoCommand());
         autoChooser.addDefault("Drive & Turn", new DrivetrainDriveAndTurn());
@@ -57,6 +56,10 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Drive 5 seconds", new DrivetrainDriveForward(5));
         autoChooser.addObject("Drive 1 second", new DrivetrainDriveForward(1));
         SmartDashboard.putData("Auto mode", autoChooser);
+        
+        joystick.addDefault("Gamepad", "gamepad");
+        joystick.addObject("Flight Sticks", "flightStick");
+        SmartDashboard.putData("Joystick Choice", joystick);
         
         teleChooser.addDefault("Arcade Drive", new DriveTrainArcadeDrive());
         teleChooser.addObject("Tank Drive", new DriveTrainTankDrive());
@@ -76,6 +79,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		oi.dashboardUpdate();
+        oi.joystickType = joystick.getSelected();
 	}
 
 	/**
@@ -111,6 +115,7 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         oi.dashboardUpdate();
+        oi.joystickType = joystick.getSelected();
     }
 
     public void teleopInit() {
@@ -129,6 +134,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         oi.dashboardUpdate();
+        oi.joystickType = joystick.getSelected();
     }
     
     /**

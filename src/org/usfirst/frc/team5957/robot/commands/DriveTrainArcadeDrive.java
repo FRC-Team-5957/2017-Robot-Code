@@ -23,8 +23,16 @@ public class DriveTrainArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double forward = -Robot.oi.leftStick.getY();
-    	double turn = -Robot.oi.leftStick.getX();
+    	double forward = 0;
+    	double turn = 0;
+    	
+    	if(Robot.oi.joystickType == "gamepad") {
+    		forward = Robot.oi.leftStick.getRawAxis(1); // left y
+    		turn    = Robot.oi.leftStick.getRawAxis(0); // left y
+    	} else if(Robot.oi.joystickType == "flightStick") {
+    		forward = Robot.oi.leftStick.getY();
+    		turn = Robot.oi.leftStick.getX();
+    	}
     	
     	Robot.driveTrain.arcadeDrive(forward, turn);
     }
