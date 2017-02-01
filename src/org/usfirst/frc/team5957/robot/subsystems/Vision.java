@@ -30,7 +30,7 @@ public class Vision extends Subsystem {
         		"http://10.59.57.19/axis-cgi/mjpg/video.cgi", // URL to camera feed
         		HttpCameraKind.kAxis);                        // Using Axis M1011 Camera
         
-        camera.setResolution(640, 480);
+        camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
         
         gearFinder = new VisionThread(camera, new GearFinderPipeline(), pipeline -> {
             if (!pipeline.convexHullsOutput().isEmpty()) {
