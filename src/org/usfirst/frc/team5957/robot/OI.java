@@ -20,7 +20,7 @@ public class OI {
     // You create one by telling it which joystick it's on and which button
     // number it is.
 	
-    public String joystickType = "gamepad"; // "gamepad" or "flightStick"
+    public ControllerType joystick = ControllerType.kGamepad;
 
 	public Joystick leftStick = new Joystick(0);
 	public Joystick rightStick = new Joystick(1);
@@ -46,6 +46,32 @@ public class OI {
     	SmartDashboard.putNumber("Left Y", leftStick.getY());
     	SmartDashboard.putNumber("Left X", leftStick.getX());
     	SmartDashboard.putNumber("Gyro", gyro.getAngle());
+    }
+    
+    /**
+     * Changes control scheme if the argument {@code joystick} is different from the OI's field {@code joystick}.
+     * 
+     * @param joystick The desired control scheme.
+     */
+    public void changeJoystick(ControllerType joystick) {
+    	if(this.joystick != joystick) {
+    		this.joystick = joystick;
+    		if(this.joystick == ControllerType.kFlightStick) {
+    			// Change command button layout?
+    		} else if(this.joystick == ControllerType.kGamepad) {
+    			// Change command button layout?
+    		}
+    	}
+    }
+    
+    public enum ControllerType {
+    	kFlightStick(0), kGamepad(1);
+    	
+    	public final int value;
+    	
+    	private ControllerType(int value) {
+    		this.value = value;
+    	}
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to

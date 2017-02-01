@@ -32,9 +32,9 @@ public class Robot extends IterativeRobot {
     
     Command teleopCommand;
     Command autonomousCommand;
-    SendableChooser<String> joystick;
     SendableChooser<Command> autoChooser;
     SendableChooser<Command> teleChooser;
+    SendableChooser<ControllerType> joystick;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -56,7 +56,6 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Drive 5 seconds", new DrivetrainDriveForward(5));
         autoChooser.addObject("Drive 1 second", new DrivetrainDriveForward(1));
         SmartDashboard.putData("Auto mode", autoChooser);
-        
         joystick.addDefault("Gamepad", "gamepad");
         joystick.addObject("Flight Sticks", "flightStick");
         SmartDashboard.putData("Joystick Choice", joystick);
@@ -73,13 +72,13 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-    	
+
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		oi.dashboardUpdate();
-        oi.joystickType = joystick.getSelected();
+        oi.changeJoystick(joystick.getSelected());
 	}
 
 	/**
@@ -115,7 +114,7 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         oi.dashboardUpdate();
-        oi.joystickType = joystick.getSelected();
+        oi.changeJoystick(joystick.getSelected());
     }
 
     public void teleopInit() {
@@ -134,7 +133,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         oi.dashboardUpdate();
-        oi.joystickType = joystick.getSelected();
+        oi.changeJoystick(joystick.getSelected());
     }
     
     /**
