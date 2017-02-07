@@ -70,7 +70,6 @@ public class DriveTrain extends Subsystem {
 	 * @param rightPow The speed setting for the right side of the drive
 	 *                 train, +1 to -1.
 	 *                 (Negative is forward, as with a joystick's Y axis)
-
 	 * 
 	 * @see RobotDrive#tankDrive(double, double)
 	 */
