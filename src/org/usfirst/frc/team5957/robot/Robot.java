@@ -42,18 +42,15 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        autoChooser = new SendableChooser<Command>();
-        teleChooser = new SendableChooser<Command>();
         driveTrain.init();
         
         final Integer gamepad = new Integer(0);
         final Integer flightStick = new Integer(1);
-        
         joystick.addDefault("Gamepad", gamepad);
         joystick.addObject("Flight Sticks", flightStick);
         SmartDashboard.putData("Joystick Choice", joystick);
-        //autoChooser.addDefault("Default Auto", new ExampleCommand());
-//        autoChooser.addObject("My Auto", new MyAutoCommand());
+
+        autoChooser = new SendableChooser<Command>();
         autoChooser.addDefault("Drive & Turn", new DrivetrainDriveAndTurn());
         autoChooser.addObject("Turn 90 Degrees", new DrivetrainTurn());
         autoChooser.addObject("Turn 90 Degrees right", new DrivetrainTurn(-90));
@@ -62,10 +59,8 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Drive 5 seconds", new DrivetrainDriveForward(5));
         autoChooser.addObject("Drive 1 second", new DrivetrainDriveForward(1));
         SmartDashboard.putData("Auto mode", autoChooser);
-        joystick.addDefault("Gamepad", "gamepad");
-        joystick.addObject("Flight Sticks", "flightStick");
-        SmartDashboard.putData("Joystick Choice", joystick);
         
+        teleChooser = new SendableChooser<Command>();
         teleChooser.addDefault("Arcade Drive", new DriveTrainArcadeDrive());
         teleChooser.addObject("Tank Drive", new DriveTrainTankDrive());
         teleChooser.addObject("Brake", new DriveTrainBrake());
