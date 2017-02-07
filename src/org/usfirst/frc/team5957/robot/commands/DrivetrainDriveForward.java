@@ -2,46 +2,62 @@ package org.usfirst.frc.team5957.robot.commands;
 
 import org.usfirst.frc.team5957.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * A command that takes one joystick's vertical and horizontal values and
- * drives the robot with them.
+ *
  */
-public class DriveTrainArcadeDrive extends Command {
+public class DrivetrainDriveForward extends Command {
+	
+	Timer timer = new Timer();
+	double time = 10;
 
-    public DriveTrainArcadeDrive() {
+    public DrivetrainDriveForward() {
         // Use requires() here to declare subsystem dependencies
-    	super("DriveTrainArcadeDrive");
+        // eg. requires(chassis);
     	requires(Robot.driveTrain);
+    }
+    
+    public DrivetrainDriveForward(double time) {
+    	this();
+    	this.time = time;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.brake();
+    	timer.reset();
+    	timer.start();
+    	SmartDashboard.putString("Driving Forward", ((Double) time).toString().concat(" seconds"));
+    	Robot.oi.gyro.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double forward = -Robot.oi.leftStick.getY();
-    	double turn = -Robot.oi.leftStick.getX();
-    	
-    	Robot.driveTrain.arcadeDrive(forward, turn);
+    	Robot.driveTrain.drive(0.25, -Robot.oi.gyro.getAngle()*0.03);
     }
+    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if (timer.get() > time)
+    	{ 
+    		return true;
+    	}
         return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("Drive Forward", "Done");
     	Robot.driveTrain.brake();
     }
+    
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.driveTrain.brake();
+    	SmartDashboard.putString("Drive Forward", "Interrupted");
     }
 }

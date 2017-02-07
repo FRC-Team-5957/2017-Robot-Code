@@ -1,9 +1,11 @@
 package org.usfirst.frc.team5957.robot;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainArcadeDrive;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainBrake;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainTankDrive;
@@ -24,10 +26,24 @@ public class OI {
     Button arcadeButton = new JoystickButton(leftStick, 12);
     Button brakeButton  = new JoystickButton(leftStick, 9);
     
+    // Sensors
+    public Gyro gyro;
+    
     public OI() {
         tankButton.whenPressed(new DriveTrainTankDrive());
         arcadeButton.whenPressed(new DriveTrainArcadeDrive());
         brakeButton.whenPressed(new DriveTrainBrake());
+        gyro = new ADXRS450_Gyro();
+        
+    }
+    
+    /**
+     * Pushes sensor data to the SmartDashboard.
+     */
+    public void dashboardUpdate() {
+    	SmartDashboard.putNumber("Left Y", leftStick.getY());
+    	SmartDashboard.putNumber("Left X", leftStick.getX());
+    	SmartDashboard.putNumber("Gyro", gyro.getAngle());
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to

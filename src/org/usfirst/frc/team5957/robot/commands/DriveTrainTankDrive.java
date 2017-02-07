@@ -22,8 +22,8 @@ public class DriveTrainTankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftPower = Robot.oi.leftStick.getY();
-    	double rightPower = Robot.oi.rightStick.getY();
+    	double leftPower = -Robot.oi.leftStick.getY();
+    	double rightPower = -Robot.oi.rightStick.getY();
     	
     	Robot.driveTrain.tankDrive(leftPower, rightPower);
     }

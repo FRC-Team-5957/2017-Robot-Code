@@ -5,15 +5,21 @@ import org.usfirst.frc.team5957.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * A command that takes one joystick's vertical and horizontal values and
- * drives the robot with them.
+ *
  */
-public class DriveTrainArcadeDrive extends Command {
+public class DriveTrainDriveAtPower extends Command {
 
-    public DriveTrainArcadeDrive() {
+	double power = 0.25;
+	
+    public DriveTrainDriveAtPower() {
         // Use requires() here to declare subsystem dependencies
-    	super("DriveTrainArcadeDrive");
+        // eg. requires(chassis);
     	requires(Robot.driveTrain);
+    }
+    
+    public DriveTrainDriveAtPower(double power) {
+    	this();
+    	this.power = power;
     }
 
     // Called just before this Command runs the first time
@@ -23,10 +29,7 @@ public class DriveTrainArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double forward = -Robot.oi.leftStick.getY();
-    	double turn = -Robot.oi.leftStick.getX();
-    	
-    	Robot.driveTrain.arcadeDrive(forward, turn);
+    	Robot.driveTrain.drive(power, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

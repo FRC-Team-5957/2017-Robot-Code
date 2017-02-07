@@ -30,10 +30,10 @@ public class DriveTrain extends Subsystem {
 		leftBack   = new VictorSP(RobotMap.leftBackMotor);
 		rightBack  = new VictorSP(RobotMap.rightBackMotor);
 		
-		leftFront.setInverted(true);
+		/*leftFront.setInverted(true);
 		rightFront.setInverted(true);
 		leftBack.setInverted(true);
-		rightBack.setInverted(true);
+		rightBack.setInverted(true);*/
 		roboDrive  = new RobotDrive(leftFront, leftBack, rightFront, rightBack);
 	}
 	
@@ -66,8 +66,10 @@ public class DriveTrain extends Subsystem {
 	 * 
 	 * @param leftPow  The speed setting for the left side of the drive
 	 *                 train, +1 to -1.
+	 *                 (Negative is forward, as with a joystick's Y axis)
 	 * @param rightPow The speed setting for the right side of the drive
 	 *                 train, +1 to -1.
+	 *                 (Negative is forward, as with a joystick's Y axis)
 	 * 
 	 * @see RobotDrive#tankDrive(double, double)
 	 */
@@ -80,6 +82,7 @@ public class DriveTrain extends Subsystem {
 	 * and vertical values from a single joystick.
 	 * 
 	 * @param moveValue The value to be used for forwards/backwards, +1 to -1.
+	 * 					(Negative is forward, as with a joystick's Y axis)
 	 * @param rotateValue The value to be used for right/left, +1 to -1.
 	 * 
 	 * @see RobotDrive#arcadeDrive(double, double)
