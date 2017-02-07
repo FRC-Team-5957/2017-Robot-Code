@@ -1,6 +1,12 @@
 
 package org.usfirst.frc.team5957.robot;
 
+import org.usfirst.frc.team5957.robot.commands.DriveTrainArcadeDrive;
+import org.usfirst.frc.team5957.robot.commands.DriveTrainBrake;
+import org.usfirst.frc.team5957.robot.commands.DriveTrainTankDrive;
+import org.usfirst.frc.team5957.robot.commands.DrivetrainDriveAndTurn;
+import org.usfirst.frc.team5957.robot.commands.DrivetrainDriveForward;
+import org.usfirst.frc.team5957.robot.commands.DrivetrainTurn;
 import org.usfirst.frc.team5957.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -21,9 +27,11 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
     public static DriveTrain driveTrain = new DriveTrain();
-
+    
+    Command teleopCommand;
     Command autonomousCommand;
-    SendableChooser chooser;
+    SendableChooser<Command> autoChooser;
+    SendableChooser<Command> teleChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -31,13 +39,27 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        chooser = new SendableChooser();
+        autoChooser = new SendableChooser<Command>();
+        teleChooser = new SendableChooser<Command>();
+        
         driveTrain.init();
         
-        //chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
-    }
+        //autoChooser.addDefault("Default Auto", new ExampleCommand());
+//        autoChooser.addObject("My Auto", new MyAutoCommand());
+        autoChooser.addDefault("Drive & Turn", new DrivetrainDriveAndTurn());
+        autoChooser.addObject("Turn 90 Degrees", new DrivetrainTurn());
+        autoChooser.addObject("Turn 90 Degrees right", new DrivetrainTurn(-90));
+        autoChooser.addObject("Turn 360 Degrees", new DrivetrainTurn(259));
+        autoChooser.addObject("Drive 10 seconds", new DrivetrainDriveForward());
+        autoChooser.addObject("Drive 5 seconds", new DrivetrainDriveForward(5));
+        autoChooser.addObject("Drive 1 second", new DrivetrainDriveForward(1));
+        SmartDashboard.putData("Auto mode", autoChooser);
+        
+        teleChooser.addDefault("Arcade Drive", new DriveTrainArcadeDrive());
+        teleChooser.addObject("Tank Drive", new DriveTrainTankDrive());
+        teleChooser.addObject("Brake", new DriveTrainBrake());
+        SmartDashboard.putData("Tele Mode", teleChooser);
+        }
 	
 	/**
      * This function is called once each time the robot enters Disabled mode.
@@ -45,24 +67,25 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+    	
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		oi.dashboardUpdate();
 	}
 
 	/**
-	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
-	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
-	 * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
+	 * This autonomous (along with the autoChooser code above) shows how to select between different autonomous modes
+	 * using the dashboard. The sendable autoChooser code works with the Java SmartDashboard. If you prefer the LabVIEW
+	 * Dashboard, remove all of the autoChooser code and uncomment the getString code to get the auto name from the text box
 	 * below the Gyro
 	 *
-	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
+	 * You can add additional auto modes by adding additional commands to the autoChooser code above (like the commented example)
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+        autonomousCommand = (Command) autoChooser.getSelected();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -84,6 +107,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        oi.dashboardUpdate();
     }
 
     public void teleopInit() {
@@ -92,6 +116,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) { autonomousCommand.cancel(); }
+        teleopCommand = (Command) teleChooser.getSelected();
+        if (teleopCommand != null) { teleopCommand.start(); }
     }
 
     /**
@@ -99,6 +125,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        oi.dashboardUpdate();
     }
     
     /**
@@ -106,5 +133,6 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+        oi.dashboardUpdate();
     }
 }
