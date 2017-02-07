@@ -53,7 +53,8 @@ public class OI {
      * 
      * @param joystick The desired control scheme.
      */
-    public void changeJoystick(ControllerType joystick) {
+    public void changeJoystick(Integer joystickType) {
+    	ControllerType joystick = ControllerType.values()[joystickType];
     	if(this.joystick != joystick) {
     		this.joystick = joystick;
     		if(this.joystick == ControllerType.kFlightStick) {

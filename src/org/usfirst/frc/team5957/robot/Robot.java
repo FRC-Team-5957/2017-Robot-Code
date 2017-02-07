@@ -29,12 +29,12 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
     public static DriveTrain driveTrain = new DriveTrain();
-    
-    Command teleopCommand;
+
     Command autonomousCommand;
+    Command teleopCommand;
+    SendableChooser<Integer> joystick;
     SendableChooser<Command> autoChooser;
     SendableChooser<Command> teleChooser;
-    SendableChooser<ControllerType> joystick;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -46,6 +46,12 @@ public class Robot extends IterativeRobot {
         teleChooser = new SendableChooser<Command>();
         driveTrain.init();
         
+        final Integer gamepad = new Integer(0);
+        final Integer flightStick = new Integer(1);
+        
+        joystick.addDefault("Gamepad", gamepad);
+        joystick.addObject("Flight Sticks", flightStick);
+        SmartDashboard.putData("Joystick Choice", joystick);
         //autoChooser.addDefault("Default Auto", new ExampleCommand());
 //        autoChooser.addObject("My Auto", new MyAutoCommand());
         autoChooser.addDefault("Drive & Turn", new DrivetrainDriveAndTurn());
@@ -64,6 +70,7 @@ public class Robot extends IterativeRobot {
         teleChooser.addObject("Tank Drive", new DriveTrainTankDrive());
         teleChooser.addObject("Brake", new DriveTrainBrake());
         SmartDashboard.putData("Tele Mode", teleChooser);
+        
         }
 
 	/**
