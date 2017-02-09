@@ -53,15 +53,26 @@ public class OI {
      * 
      * @param joystick The desired control scheme.
      */
-    public void changeJoystick(String joystickType) {
-    	int typeIndex = -1;
+    public void changeJoystick(ControllerType joystickType) {
+    	if(this.joystick != joystickType) {
+    		this.joystick = joystickType;
+    		if(this.joystick == ControllerType.kFlightStick) {
+    			// Change command button layout?
+    		} else if(this.joystick == ControllerType.kGamepad) {
+    			// Change command button layout?
+    		}
+    	}
+    }
+    /*public void changeJoystick(String joystickType) {
+    	
+    	int typeIndex;
     	
     	switch (joystickType) {
-    	case "gamepad":
-    		typeIndex = 1;
-    		break;
     	case "flightStick":
     		typeIndex = 0;
+    		break;
+		case "gamepad":
+    		typeIndex = 1;
     		break;
     	default:
     		return;
@@ -76,7 +87,7 @@ public class OI {
     			// Change command button layout?
     		}
     	}
-    }
+    }*/
     
     public enum ControllerType {
     	kFlightStick(0), kGamepad(1);

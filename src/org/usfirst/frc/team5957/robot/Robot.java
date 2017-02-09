@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team5957.robot;
 
+import org.usfirst.frc.team5957.robot.OI.ControllerType;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainArcadeDrive;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainBrake;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainTankDrive;
@@ -30,9 +31,12 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
     public static DriveTrain driveTrain = new DriveTrain();
 
+    final String gamepad = "gamepad";
+    final String flightStick = "flightStick";
+    
     Command autonomousCommand;
     Command teleopCommand;
-    SendableChooser<String> joystick;
+    SendableChooser<ControllerType> joystick;
     SendableChooser<Command> autoChooser;
     SendableChooser<Command> teleChooser;
 
@@ -44,10 +48,9 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         driveTrain.init();
         
-        String gamepad = "gamepad";
-        String flightStick = "flightStick";
-        joystick.addObject("Gamepad", gamepad);
-        joystick.addDefault("Flight Sticks", flightStick);
+        joystick = new SendableChooser<ControllerType>();
+        joystick.addObject("Gamepad", ControllerType.kGamepad);
+        joystick.addDefault("Flight Sticks", ControllerType.kFlightStick);
         SmartDashboard.putData("Joystick Choice", joystick);
 
         autoChooser = new SendableChooser<Command>();
