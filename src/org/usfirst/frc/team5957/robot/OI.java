@@ -20,7 +20,7 @@ public class OI {
     // You create one by telling it which joystick it's on and which button
     // number it is.
 	
-    public ControllerType joystick = ControllerType.kGamepad;
+    public ControllerType joystick = ControllerType.kFlightStick;
 
 	public Joystick leftStick = new Joystick(0);
 	public Joystick rightStick = new Joystick(1);
@@ -53,8 +53,21 @@ public class OI {
      * 
      * @param joystick The desired control scheme.
      */
-    public void changeJoystick(Integer joystickType) {
-    	ControllerType joystick = ControllerType.values()[joystickType];
+    public void changeJoystick(String joystickType) {
+    	int typeIndex = -1;
+    	
+    	switch (joystickType) {
+    	case "gamepad":
+    		typeIndex = 1;
+    		break;
+    	case "flightStick":
+    		typeIndex = 0;
+    		break;
+    	default:
+    		return;
+    	}
+    	
+    	ControllerType joystick = ControllerType.values()[typeIndex];
     	if(this.joystick != joystick) {
     		this.joystick = joystick;
     		if(this.joystick == ControllerType.kFlightStick) {

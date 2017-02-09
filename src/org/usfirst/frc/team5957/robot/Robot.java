@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     Command teleopCommand;
-    SendableChooser<Integer> joystick;
+    SendableChooser<String> joystick;
     SendableChooser<Command> autoChooser;
     SendableChooser<Command> teleChooser;
 
@@ -44,17 +44,17 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         driveTrain.init();
         
-        final Integer gamepad = new Integer(0);
-        final Integer flightStick = new Integer(1);
-        joystick.addDefault("Gamepad", gamepad);
-        joystick.addObject("Flight Sticks", flightStick);
+        String gamepad = "gamepad";
+        String flightStick = "flightStick";
+        joystick.addObject("Gamepad", gamepad);
+        joystick.addDefault("Flight Sticks", flightStick);
         SmartDashboard.putData("Joystick Choice", joystick);
 
         autoChooser = new SendableChooser<Command>();
         autoChooser.addDefault("Drive & Turn", new DrivetrainDriveAndTurn());
         autoChooser.addObject("Turn 90 Degrees", new DrivetrainTurn());
         autoChooser.addObject("Turn 90 Degrees right", new DrivetrainTurn(-90));
-        autoChooser.addObject("Turn 360 Degrees", new DrivetrainTurn(259));
+        autoChooser.addObject("Turn 360 Degrees", new DrivetrainTurn(360));
         autoChooser.addObject("Drive 10 seconds", new DrivetrainDriveForward());
         autoChooser.addObject("Drive 5 seconds", new DrivetrainDriveForward(5));
         autoChooser.addObject("Drive 1 second", new DrivetrainDriveForward(1));
