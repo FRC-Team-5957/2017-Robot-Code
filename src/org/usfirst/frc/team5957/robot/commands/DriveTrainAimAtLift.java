@@ -5,16 +5,17 @@ import org.usfirst.frc.team5957.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * A command that turns the robot to face a gear using the camera.
+ * A command that turns towards a lift, using the camera and the retroreflective
+ * tape one either side of the lift.
  */
-public class DriveTrainTurnToGear extends Command {
+public class DriveTrainAimAtLift extends Command {
 
 	private boolean isDone = false;
 
-	public DriveTrainTurnToGear() {
+	public DriveTrainAimAtLift() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		super("DriveTrainTurnToGear");
+		super("DriveTrainAimAtLift");
 		requires(Robot.driveTrain);
 		// Does not require vision
 	}
@@ -25,10 +26,15 @@ public class DriveTrainTurnToGear extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		double centerOneX;
+		double centerTwoX;
 		double centerX;
-		synchronized (Robot.vision.gearLock) {
-			centerX = Robot.vision.gearCenterX;
+
+		synchronized (Robot.vision.tapeLock) {
+			centerOneX = Robot.vision.tapeOneCenterX;
+			centerTwoX = Robot.vision.tapeTwoCenterX;
 		}
+		centerX = (centerOneX + centerTwoX) / 2;
 		// Converts X position to number from -1.0 to 1.0
 		double turn = (centerX * Math.pow(Robot.vision.IMG_HEIGHT, -1) - 1);
 

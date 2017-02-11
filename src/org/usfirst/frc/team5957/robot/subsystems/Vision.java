@@ -3,6 +3,7 @@ package org.usfirst.frc.team5957.robot.subsystems;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team5957.robot.camera.GearFinderPipeline;
+import org.usfirst.frc.team5957.robot.camera.TapeFinderPipeline;
 
 import edu.wpi.cscore.HttpCamera;
 import edu.wpi.cscore.HttpCamera.HttpCameraKind;
@@ -23,7 +24,12 @@ public class Vision extends Subsystem {
 	
 	VisionThread gearFinder;
 	public double gearCenterX = 0.0;
-	public final Object imgLock = new Object();
+	public final Object gearLock = new Object();
+	
+	VisionThread tapeFinder;
+	public double tapeOneCenterX = 0.0;
+	public double tapeTwoCenterX = 0.0;
+	public final Object tapeLock = new Object();
 	
 	public void init() {
         camera = new HttpCamera("Axis",                       // Unique Identifier String
@@ -35,12 +41,24 @@ public class Vision extends Subsystem {
         gearFinder = new VisionThread(camera, new GearFinderPipeline(), pipeline -> {
             if (!pipeline.convexHullsOutput().isEmpty()) {
                 Rect r = Imgproc.boundingRect(pipeline.convexHullsOutput().get(0));
-                synchronized (imgLock) {
+                synchronized (gearLock) {
                     gearCenterX = r.x + (r.width / 2);
                 }
             }
         });
         gearFinder.start();
+        
+        tapeFinder = new VisionThread(camera, new TapeFinderPipeline(), pipeline -> {
+            if (!pipeline.convexHullsOutput().isEmpty()) {
+                Rect tapeOne = Imgproc.boundingRect(pipeline.convexHullsOutput().get(0));
+                Rect tapeTwo = Imgproc.boundingRect(pipeline.convexHullsOutput().get(1));
+                synchronized (tapeLock) {
+                    tapeOneCenterX = tapeOne.x + (tapeOne.width / 2);
+                    tapeTwoCenterX = tapeTwo.x + (tapeTwo.width / 2);
+                }
+            }
+        });
+        tapeFinder.start();
 	}
 
     public void initDefaultCommand() {
