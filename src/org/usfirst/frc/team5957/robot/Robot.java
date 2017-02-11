@@ -3,6 +3,7 @@ package org.usfirst.frc.team5957.robot;
 
 import org.usfirst.frc.team5957.robot.OI.ControllerType;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainAimAtLift;
+import org.usfirst.frc.team5957.robot.commands.DriveTrainTurnToGear;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainArcadeDrive;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainAutonomousGroup;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainBrake;
@@ -34,11 +35,11 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain = new DriveTrain();
     public static Vision vision = new Vision();
 
-    Command autonomousCommand;
-    Command teleopCommand;
-    SendableChooser<ControllerType> joystick;
-    SendableChooser<Command> autoChooser;
-    SendableChooser<Command> teleChooser;
+	Command teleopCommand;
+	Command autonomousCommand;
+	SendableChooser<ControllerType> joystick;
+	SendableChooser<Command> autoChooser;
+	SendableChooser<Command> teleChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -52,25 +53,7 @@ public class Robot extends IterativeRobot {
         joystick.addObject("Gamepad", ControllerType.kGamepad);
         joystick.addDefault("Flight Sticks", ControllerType.kFlightStick);
         SmartDashboard.putData("Joystick Choice", joystick);
-
-        autoChooser = new SendableChooser<Command>();
-        autoChooser.addDefault("Drive & Turn", new DrivetrainDriveAndTurn());
-        autoChooser.addObject("Turn 90 Degrees", new DrivetrainTurn());
-        autoChooser.addObject("Turn 90 Degrees right", new DrivetrainTurn(-90));
-        autoChooser.addObject("Turn 360 Degrees", new DrivetrainTurn(360));
-        autoChooser.addObject("Drive 10 seconds", new DrivetrainDriveForward());
-        autoChooser.addObject("Drive 5 seconds", new DrivetrainDriveForward(5));
-        autoChooser.addObject("Drive 1 second", new DrivetrainDriveForward(1));
-        autoChooser.addObject("Auto for Competition", new DriveTrainAutonomousGroup());
-        SmartDashboard.putData("Auto mode", autoChooser);
-        
-        teleChooser = new SendableChooser<Command>();
-        teleChooser.addDefault("Arcade Drive", new DriveTrainArcadeDrive());
-        teleChooser.addObject("Tank Drive", new DriveTrainTankDrive());
-        teleChooser.addObject("Brake", new DriveTrainBrake());
-        SmartDashboard.putData("Tele Mode", teleChooser);
-        
-        }
+	}
 
 	/**
      * This function is called once each time the robot enters Disabled mode.
