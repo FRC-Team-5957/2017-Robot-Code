@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5957.robot.commands;
 
+import org.usfirst.frc.team5957.robot.OI.ControllerType;
 import org.usfirst.frc.team5957.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,8 +24,16 @@ public class DriveTrainArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double forward = -Robot.oi.leftStick.getY();
-    	double turn = -Robot.oi.leftStick.getX();
+    	double forward = 0;
+    	double turn = 0;
+    	
+    	if(Robot.oi.joystick == ControllerType.kGamepad) {
+    		forward = -Robot.oi.leftStick.getRawAxis(1); // left y
+    		turn    = -Robot.oi.leftStick.getRawAxis(0); // left y
+    	} else if(Robot.oi.joystick == ControllerType.kFlightStick) {
+    		forward = -Robot.oi.leftStick.getY();
+    		turn = -Robot.oi.leftStick.getX();
+    	}
     	
     	Robot.driveTrain.arcadeDrive(forward, turn);
     }
