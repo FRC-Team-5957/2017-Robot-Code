@@ -24,17 +24,19 @@ public class OI {
 
 	public Joystick leftStick = new Joystick(0);
 	public Joystick rightStick = new Joystick(1);
-    Button tankButton   = new JoystickButton(leftStick, 3);
-    Button arcadeButton = new JoystickButton(leftStick, 4);
-    Button brakeButton  = new JoystickButton(leftStick, 5);
-    
+    Button buttonThree   = new JoystickButton(leftStick, 3);
+    Button buttonFour = new JoystickButton(leftStick, 4);
+    Button buttonFive  = new JoystickButton(leftStick, 5);
+    Button buttonNine = new JoystickButton(leftStick, 9);
+    Button buttonTen = new JoystickButton(leftStick, 10);
+    Button[] buttons = new Button[]{buttonThree, buttonFour, buttonFive, buttonNine, buttonTen};
     // Sensors
     public Gyro gyro;
     
     public OI() {
-        tankButton.whenPressed(new DriveTrainTankDrive());
-        arcadeButton.whenPressed(new DriveTrainArcadeDrive());
-        brakeButton.whenPressed(new DriveTrainBrake());
+        buttonThree.whenPressed(new DriveTrainTankDrive());
+        buttonFour.whenPressed(new DriveTrainArcadeDrive());
+        buttonFive.whenPressed(new DriveTrainBrake());
         gyro = new ADXRS450_Gyro();
         
     }
@@ -56,38 +58,8 @@ public class OI {
     public void changeJoystick(ControllerType joystickType) {
     	if(this.joystick != joystickType) {
     		this.joystick = joystickType;
-    		if(this.joystick == ControllerType.kFlightStick) {
-    			// Change command button layout?
-    		} else if(this.joystick == ControllerType.kGamepad) {
-    			// Change command button layout?
-    		}
     	}
     }
-    /*public void changeJoystick(String joystickType) {
-    	
-    	int typeIndex;
-    	
-    	switch (joystickType) {
-    	case "flightStick":
-    		typeIndex = 0;
-    		break;
-		case "gamepad":
-    		typeIndex = 1;
-    		break;
-    	default:
-    		return;
-    	}
-    	
-    	ControllerType joystick = ControllerType.values()[typeIndex];
-    	if(this.joystick != joystick) {
-    		this.joystick = joystick;
-    		if(this.joystick == ControllerType.kFlightStick) {
-    			// Change command button layout?
-    		} else if(this.joystick == ControllerType.kGamepad) {
-    			// Change command button layout?
-    		}
-    	}
-    }*/
     
     public enum ControllerType {
     	kFlightStick(0), kGamepad(1);

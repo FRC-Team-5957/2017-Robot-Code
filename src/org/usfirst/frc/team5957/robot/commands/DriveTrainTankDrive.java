@@ -27,8 +27,8 @@ public class DriveTrainTankDrive extends Command {
     	double rightPower = 0;
     	
     	if(Robot.oi.joystick == ControllerType.kGamepad) {
-    		leftPower = Robot.oi.leftStick.getRawAxis(1); // left y
-    		rightPower = Robot.oi.leftStick.getRawAxis(6); // right y
+    		leftPower = -Robot.oi.leftStick.getRawAxis(1); // left y
+    		rightPower = -Robot.oi.leftStick.getRawAxis(5); // right y
     	} else if(Robot.oi.joystick == ControllerType.kFlightStick) {
     		leftPower = Robot.oi.leftStick.getY();
     		rightPower = Robot.oi.rightStick.getY();

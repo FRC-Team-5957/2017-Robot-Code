@@ -28,8 +28,8 @@ public class DriveTrainArcadeDrive extends Command {
     	double turn = 0;
     	
     	if(Robot.oi.joystick == ControllerType.kGamepad) {
-    		forward = Robot.oi.leftStick.getRawAxis(1); // left y
-    		turn    = Robot.oi.leftStick.getRawAxis(0); // left y
+    		forward = -Robot.oi.leftStick.getRawAxis(1); // left y
+    		turn    = -Robot.oi.leftStick.getRawAxis(0); // left y
     	} else if(Robot.oi.joystick == ControllerType.kFlightStick) {
     		forward = Robot.oi.leftStick.getY();
     		turn = Robot.oi.leftStick.getX();
