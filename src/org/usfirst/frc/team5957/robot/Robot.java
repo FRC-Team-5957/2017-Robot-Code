@@ -2,6 +2,7 @@
 package org.usfirst.frc.team5957.robot;
 
 import org.usfirst.frc.team5957.robot.OI.ControllerType;
+import org.usfirst.frc.team5957.robot.commands.DriveTrainAimAtLift;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainArcadeDrive;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainAutonomousGroup;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainBrake;
