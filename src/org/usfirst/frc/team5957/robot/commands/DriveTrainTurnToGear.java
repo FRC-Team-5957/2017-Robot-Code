@@ -3,6 +3,7 @@ package org.usfirst.frc.team5957.robot.commands;
 import org.usfirst.frc.team5957.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * A command that turns the robot to face a gear using the camera.
@@ -21,13 +22,17 @@ public class DriveTrainTurnToGear extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		SmartDashboard.putNumber("Gear X", 0xDEADBEEF);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		double centerX;
-		synchronized (Robot.vision.gearLock) {
-			centerX = Robot.vision.gearCenterX;
+		Double[] defaultCenter = {};
+		double centerX = Robot.vision.vision.getNumberArray("Gear Centers", defaultCenter)[0];
+
+		if(centerX == 0.0) {
+			Robot.driveTrain.tankDrive(-0.25, 0.25);
+			return;
 		}
 		// Converts X position to number from -1.0 to 1.0
 		double turn = (centerX * Math.pow(Robot.vision.IMG_HEIGHT, -1) - 1);
@@ -42,7 +47,7 @@ public class DriveTrainTurnToGear extends Command {
 
 		if (turn < 0.1 && turn > -0.1) {
 			isDone = true;
-		}
+		}	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
