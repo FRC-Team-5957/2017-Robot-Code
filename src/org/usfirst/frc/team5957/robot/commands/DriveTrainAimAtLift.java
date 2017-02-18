@@ -3,6 +3,7 @@ package org.usfirst.frc.team5957.robot.commands;
 import org.usfirst.frc.team5957.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * A command that turns towards a lift, using the camera and the retroreflective
@@ -17,7 +18,7 @@ public class DriveTrainAimAtLift extends Command {
 		// eg. requires(chassis);
 		super("DriveTrainAimAtLift");
 		requires(Robot.driveTrain);
-		// Does not require vision
+		requires(Robot.vision);
 	}
 
 	// Called just before this Command runs the first time
@@ -30,10 +31,15 @@ public class DriveTrainAimAtLift extends Command {
 		double centerTwoX;
 		double centerX;
 
-		synchronized (Robot.vision.tapeLock) {
-			centerOneX = Robot.vision.tapeOneCenterX;
-			centerTwoX = Robot.vision.tapeTwoCenterX;
+		centerOneX = Robot.vision.retrotapeTable.getNumber("Tape One Center", -1);
+		centerTwoX = Robot.vision.retrotapeTable.getNumber("Tape Two Center", -1);
+
+		if (centerOneX == -1 || centerTwoX == -1) {
+			SmartDashboard.putString("Aim At Lift", "Less than two tapes found.");
+			isDone = true;
+			return;
 		}
+
 		centerX = (centerOneX + centerTwoX) / 2;
 		// Converts X position to number from -1.0 to 1.0
 		double turn = (centerX * Math.pow(Robot.vision.IMG_HEIGHT, -1) - 1);
@@ -49,6 +55,8 @@ public class DriveTrainAimAtLift extends Command {
 		if (turn < 0.1 && turn > -0.1) {
 			isDone = true;
 		}
+
+		SmartDashboard.putString("Aim At Lift", "Center: " + centerX + "; Turn: " + turn);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -63,11 +71,13 @@ public class DriveTrainAimAtLift extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.driveTrain.brake();
+		SmartDashboard.putString("Aim At Lift", "Finished.");
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		Robot.driveTrain.brake();
+		SmartDashboard.putString("Aim At Lift", "Interrupted.");
 	}
 }

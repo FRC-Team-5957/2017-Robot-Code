@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * A command that turns the robot to face a gear using the camera.
+ * A command that turns towards a lift, using the camera and the retroreflective
+ * tape one either side of the lift.
  */
 public class DriveTrainTurnToGear extends Command {
 
@@ -17,23 +18,25 @@ public class DriveTrainTurnToGear extends Command {
 		// eg. requires(chassis);
 		super("DriveTrainTurnToGear");
 		requires(Robot.driveTrain);
-		// Does not require vision
+		requires(Robot.vision);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		SmartDashboard.putNumber("Gear X", 0xDEADBEEF);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Double[] defaultCenter = {};
-		double centerX = Robot.vision.vision.getNumberArray("Gear Centers", defaultCenter)[0];
+		double centerX;
 
-		if(centerX == 0.0) {
-			Robot.driveTrain.tankDrive(-0.25, 0.25);
+		centerX = Robot.vision.gearTable.getNumber("Gear 0 Center", -1);
+
+		if (centerX == -1) {
+			SmartDashboard.putString("Turn To Gear", "No gears found.");
+			isDone = true;
 			return;
 		}
+
 		// Converts X position to number from -1.0 to 1.0
 		double turn = (centerX * Math.pow(Robot.vision.IMG_HEIGHT, -1) - 1);
 
@@ -47,7 +50,9 @@ public class DriveTrainTurnToGear extends Command {
 
 		if (turn < 0.1 && turn > -0.1) {
 			isDone = true;
-		}	
+		}
+
+		SmartDashboard.putString("Turn To Gear", "Center: " + centerX + "; Turn: " + turn);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -62,11 +67,13 @@ public class DriveTrainTurnToGear extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.driveTrain.brake();
+		SmartDashboard.putString("Turn To Gear", "Finished.");
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		Robot.driveTrain.brake();
+		SmartDashboard.putString("Turn To Gear", "Interrupted.");
 	}
 }

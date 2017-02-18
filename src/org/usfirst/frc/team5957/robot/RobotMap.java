@@ -14,6 +14,7 @@ public class RobotMap {
 	public static final int rightFrontMotor = 3;
 	public static final int leftBackMotor   = 0;
 	public static final int rightBackMotor  = 2;
+	public static final String cameraURL = "http://10.59.57.19/axis-cgi/mjpg/video.cgi";
     
     // If you are using multiple modules, make sure to define both the port
     // number and the module. For example you with a rangefinder:
