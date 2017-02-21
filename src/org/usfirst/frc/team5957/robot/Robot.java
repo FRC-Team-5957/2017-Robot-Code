@@ -3,6 +3,7 @@ package org.usfirst.frc.team5957.robot;
 
 import org.usfirst.frc.team5957.robot.OI.ControllerType;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainArcadeDrive;
+import org.usfirst.frc.team5957.robot.commands.DriveTrainAutonomousGroup;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainBrake;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainTankDrive;
 
@@ -31,9 +32,6 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
     public static DriveTrain driveTrain = new DriveTrain();
 
-    final String gamepad = "gamepad";
-    final String flightStick = "flightStick";
-    
     Command autonomousCommand;
     Command teleopCommand;
     SendableChooser<ControllerType> joystick;
@@ -61,6 +59,7 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Drive 10 seconds", new DrivetrainDriveForward());
         autoChooser.addObject("Drive 5 seconds", new DrivetrainDriveForward(5));
         autoChooser.addObject("Drive 1 second", new DrivetrainDriveForward(1));
+        autoChooser.addObject("Auto for Competition", new DriveTrainAutonomousGroup());
         SmartDashboard.putData("Auto mode", autoChooser);
         
         teleChooser = new SendableChooser<Command>();
