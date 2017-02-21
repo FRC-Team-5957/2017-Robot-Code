@@ -1,48 +1,46 @@
-package org.usfirst.frc.team5957.robot.commands;
+package org.usfirst.frc.team5957.robot.commands.drivetrain;
 
 import org.usfirst.frc.team5957.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class DrivetrainDriveForward extends Command {
+public class DrivetrainTurn extends Command {
+	double angle = 90;
 	
-	Timer timer = new Timer();
-	double time = 10;
-
-    public DrivetrainDriveForward() {
+    public DrivetrainTurn() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
     }
     
-    public DrivetrainDriveForward(double time) {
+    public DrivetrainTurn(double angle) {
     	this();
-    	this.time = time;
+    	this.angle = angle;
     }
+    
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	timer.reset();
-    	timer.start();
-    	SmartDashboard.putString("Driving Forward", ((Double) time).toString().concat(" seconds"));
+    	SmartDashboard.putString("Turning", ((Double) angle).toString().concat(" degrees"));
     	Robot.oi.gyro.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.drive(0.25, -Robot.oi.gyro.getAngle()*0.03);
+    	if(angle < 0) {
+        	Robot.driveTrain.tankDrive(0.33, -0.33);
+    	} else {
+    		Robot.driveTrain.tankDrive(-0.33, 0.33);
+    	}
     }
-    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (timer.get() > time)
-    	{ 
+    	if(Math.abs(Robot.oi.gyro.getAngle()) > Math.abs(angle)) {
     		return true;
     	}
         return false;
@@ -50,14 +48,14 @@ public class DrivetrainDriveForward extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	SmartDashboard.putString("Drive Forward", "Done");
+    	SmartDashboard.putString("Turning", "Done");
     	Robot.driveTrain.brake();
     }
-    
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	SmartDashboard.putString("Drive Forward", "Interrupted");
+    	SmartDashboard.putString("Turning", "Interrupted");
+    	Robot.driveTrain.brake();
     }
 }

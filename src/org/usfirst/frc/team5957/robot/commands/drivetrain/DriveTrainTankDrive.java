@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5957.robot.commands;
+package org.usfirst.frc.team5957.robot.commands.drivetrain;
 
 import org.usfirst.frc.team5957.robot.OI.ControllerType;
 import org.usfirst.frc.team5957.robot.Robot;
@@ -6,14 +6,13 @@ import org.usfirst.frc.team5957.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * A command that takes one joystick's vertical and horizontal values and
- * drives the robot with them.
+ * A command that takes two joysticks' vertical values and drives the robot with them.
  */
-public class DriveTrainArcadeDrive extends Command {
+public class DriveTrainTankDrive extends Command {
 
-    public DriveTrainArcadeDrive() {
+    public DriveTrainTankDrive() {
         // Use requires() here to declare subsystem dependencies
-    	super("DriveTrainArcadeDrive");
+    	super("DriveTrainTankDrive");
     	requires(Robot.driveTrain);
     }
 
@@ -24,18 +23,18 @@ public class DriveTrainArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double forward = 0;
-    	double turn = 0;
+    	double leftPower = 0;
+    	double rightPower = 0;
     	
     	if(Robot.oi.joystick == ControllerType.kGamepad) {
-    		forward = -Robot.oi.leftStick.getRawAxis(1); // left y
-    		turn    = -Robot.oi.leftStick.getRawAxis(0); // left y
+    		leftPower = -Robot.oi.leftStick.getRawAxis(1); // left y
+    		rightPower = -Robot.oi.leftStick.getRawAxis(5); // right y
     	} else if(Robot.oi.joystick == ControllerType.kFlightStick) {
-    		forward = -Robot.oi.leftStick.getY();
-    		turn = -Robot.oi.leftStick.getX();
+    		leftPower = -Robot.oi.leftStick.getY();
+    		rightPower = -Robot.oi.rightStick.getY();
     	}
-    	
-    	Robot.driveTrain.arcadeDrive(forward, turn);
+	
+    	Robot.driveTrain.tankDrive(leftPower, rightPower);
     }
 
     // Make this return true when this Command no longer needs to run execute()

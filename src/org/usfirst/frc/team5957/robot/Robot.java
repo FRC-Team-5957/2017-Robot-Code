@@ -4,15 +4,16 @@ package org.usfirst.frc.team5957.robot;
 import org.usfirst.frc.team5957.robot.OI.ControllerType;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainTurnToGear;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainAimAtLift;
-import org.usfirst.frc.team5957.robot.commands.DriveTrainArcadeDrive;
 import org.usfirst.frc.team5957.robot.commands.DriveTrainAutonomousGroup;
-import org.usfirst.frc.team5957.robot.commands.DriveTrainBrake;
-import org.usfirst.frc.team5957.robot.commands.DriveTrainTankDrive;
-
-import org.usfirst.frc.team5957.robot.commands.DrivetrainDriveAndTurn;
-import org.usfirst.frc.team5957.robot.commands.DrivetrainDriveForward;
-import org.usfirst.frc.team5957.robot.commands.DrivetrainTurn;
-
+import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainAimAtLift;
+import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainArcadeDrive;
+import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
+import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTankDrive;
+import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTurnToGear;
+import org.usfirst.frc.team5957.robot.commands.drivetrain.DrivetrainDriveAndTurn;
+import org.usfirst.frc.team5957.robot.commands.drivetrain.DrivetrainDriveForward;
+import org.usfirst.frc.team5957.robot.commands.drivetrain.DrivetrainTurn;
+import org.usfirst.frc.team5957.robot.subsystems.Door;
 import org.usfirst.frc.team5957.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;

@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
- *
+ * The subsystem used to interface with the camera.
+ * 
+ * @see Subsystem
  */
 public class Vision extends Subsystem {
 
