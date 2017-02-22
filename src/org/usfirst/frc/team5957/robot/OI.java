@@ -11,7 +11,7 @@ import org.usfirst.frc.team5957.robot.commands.door.DoorHold;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainArcadeDrive;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTankDrive;
-import org.usfirst.frc.team5957.robot.triggers.LimitSwitch;
+import org.usfirst.frc.team5957.robot.triggers.DigitalTrigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -36,11 +36,11 @@ public class OI {
 	Button[] buttons = new Button[] { buttonThree, buttonFour, buttonFive, buttonNine, buttonTen };
 	// Sensors
 	public Gyro gyro;
-	public LimitSwitch doorLimit;
+	public DigitalTrigger doorLimit;
 
 	public OI() {
 		gyro = new ADXRS450_Gyro();
-		doorLimit = new LimitSwitch(RobotMap.DOOR_LIMIT);
+		doorLimit = new DigitalTrigger(RobotMap.DOOR_LIMIT);
 
 		buttonThree.whenPressed(new DriveTrainTankDrive());
 		buttonFour.whenPressed(new DriveTrainArcadeDrive());

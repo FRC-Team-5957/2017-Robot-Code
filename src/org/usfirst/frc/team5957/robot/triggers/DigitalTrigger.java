@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
  * This is a trigger created to model a digital input, specifically a limit
  * switch.
  */
-public class LimitSwitch extends Trigger {
+public class DigitalTrigger extends Trigger {
 
 	private DigitalInput m_switch;
 
@@ -17,7 +17,7 @@ public class LimitSwitch extends Trigger {
 	 * @param port
 	 *            Digital I/O port to which the switch is connected.
 	 */
-	public LimitSwitch(int port) {
+	public DigitalTrigger(int port) {
 		m_switch = new DigitalInput(port);
 	}
 
