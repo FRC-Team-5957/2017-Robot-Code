@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5957.robot.commands.drivetrain;
 
 import org.usfirst.frc.team5957.robot.Robot;
+import org.usfirst.frc.team5957.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,7 +39,7 @@ public class DriveTrainTurnToGear extends Command {
 		}
 
 		// Converts X position to number from -1.0 to 1.0
-		double turn = (centerX * Math.pow(Robot.vision.IMG_HEIGHT, -1) - 1);
+		double turn = (centerX * Math.pow(Vision.IMG_WIDTH, -1) - 1);
 
 		if (turn > 0.25 || turn < -0.25) {
 			Robot.driveTrain.tankDrive(turn, -turn);

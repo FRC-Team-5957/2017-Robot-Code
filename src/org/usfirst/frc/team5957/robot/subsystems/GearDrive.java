@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * The subsystem controlling the screw conveyor that holds and moves gears.
+ * This subsystem controls the screw conveyor that holds and moves gears.
  * 
  * @see Subsystem
  */
@@ -21,7 +21,7 @@ public class GearDrive extends Subsystem {
 	 * Robot.robotInit()}.
 	 */
 	public void init() {
-		m_driveMotor = new VictorSP(RobotMap.gearDrive);
+		m_driveMotor = new VictorSP(RobotMap.GEAR_DRIVE);
 	}
 	
 	/**

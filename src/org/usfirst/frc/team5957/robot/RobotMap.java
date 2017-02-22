@@ -9,12 +9,12 @@ package org.usfirst.frc.team5957.robot;
 public class RobotMap {
 
 	// Motor Controller Ports
-	public static final int leftFrontMotor = 1;
-	public static final int rightFrontMotor = 3;
-	public static final int leftBackMotor = 0;
-	public static final int rightBackMotor = 2;
-	public static final int doorMotor = 4;
-	public static final int gearDrive = 5;
+	public static final int LEFT_FRONT_MOTOR = 1;
+	public static final int RIGHT_FRONT_MOTOR = 3;
+	public static final int LEFT_BACK_MOTOR = 0;
+	public static final int RIGHT_BACK_MOTOR = 2;
+	public static final int DOOR_MOTOR = 4;
+	public static final int GEAR_DRIVE = 5;
 
 	// Axis Camera Stream URL
 	public static final String cameraURL = "http://10.59.57.19/axis-cgi/mjpg/video.cgi";

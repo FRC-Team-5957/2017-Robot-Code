@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * The subsystem used to control the door that holds fuel in.
+ * This subsystem is used to control the door that holds fuel in.
  * 
  * @see Subsystem
  */
@@ -21,7 +21,7 @@ public class Door extends Subsystem {
 	 * Robot.robotInit()}.
 	 */
 	public void init() {
-		m_doorMotor = new VictorSP(RobotMap.doorMotor);
+		m_doorMotor = new VictorSP(RobotMap.DOOR_MOTOR);
 	}
 
 	/**

@@ -8,11 +8,14 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
- * The subsystem used to interface with the camera.
+ * This subsystem is used to interface with the camera.
  * 
  * @see Subsystem
  */
 public class Vision extends Subsystem {
+
+	public static final int IMG_HEIGHT = 480;
+	public static final int IMG_WIDTH = 640;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -23,9 +26,6 @@ public class Vision extends Subsystem {
 	public ITable gearTable;
 
 	ITable axisCamera;
-
-	public final int IMG_WIDTH = 640;
-	public final int IMG_HEIGHT = 480;
 
 	public void init() {
 		visionTable = NetworkTable.getTable("CameraPublisher");

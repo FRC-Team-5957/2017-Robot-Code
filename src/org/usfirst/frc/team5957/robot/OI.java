@@ -58,10 +58,10 @@ public class OI {
 	}
 
 	/**
-	 * Changes control scheme if the argument {@code joystick} is different from
-	 * the OI's field {@code joystick}.
+	 * Changes control scheme if the argument {@code joystickType} is different from
+	 * the OI's field {@code joystickType}.
 	 * 
-	 * @param joystick
+	 * @param joystickType
 	 *            The desired control scheme.
 	 */
 	public void changeJoystick(ControllerType joystickType) {

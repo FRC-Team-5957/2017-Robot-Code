@@ -13,6 +13,7 @@ public class DrivetrainDriveForward extends Command {
 	
 	Timer timer = new Timer();
 	double time = 10;
+	double speed = 0.25;
 
     public DrivetrainDriveForward() {
         // Use requires() here to declare subsystem dependencies
@@ -23,6 +24,11 @@ public class DrivetrainDriveForward extends Command {
     public DrivetrainDriveForward(double time) {
     	this();
     	this.time = time;
+    }
+    
+    public DrivetrainDriveForward(double time, double speed) {
+    	this(time);
+    	this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -35,7 +41,7 @@ public class DrivetrainDriveForward extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.drive(0.25, -Robot.oi.gyro.getAngle()*0.03);
+    	Robot.driveTrain.drive(speed, -Robot.oi.gyro.getAngle()*0.03);
     }
     
 

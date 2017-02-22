@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * The subsystem containing the motors used to drive the robot.
+ * This subsystem contains the motors used to drive the robot.
  * 
  * @see Subsystem
  */
@@ -26,10 +26,10 @@ public class DriveTrain extends Subsystem {
 	 * Robot.robotInit()}.
 	 */
 	public void init() {
-		m_leftFront = new VictorSP(RobotMap.leftFrontMotor);
-		m_rightFront = new VictorSP(RobotMap.rightFrontMotor);
-		m_leftBack = new VictorSP(RobotMap.leftBackMotor);
-		m_rightBack = new VictorSP(RobotMap.rightBackMotor);
+		m_leftFront = new VictorSP(RobotMap.LEFT_FRONT_MOTOR);
+		m_rightFront = new VictorSP(RobotMap.RIGHT_FRONT_MOTOR);
+		m_leftBack = new VictorSP(RobotMap.LEFT_BACK_MOTOR);
+		m_rightBack = new VictorSP(RobotMap.RIGHT_BACK_MOTOR);
 
 		roboDrive = new RobotDrive(m_leftFront, m_leftBack, m_rightFront, m_rightBack);
 	}
