@@ -14,6 +14,7 @@ public class RobotMap {
 	public static final int leftBackMotor = 0;
 	public static final int rightBackMotor = 2;
 	public static final int doorMotor = 4;
+	public static final int gearDrive = 5;
 
 	// Axis Camera Stream URL
 	public static final String cameraURL = "http://10.59.57.19/axis-cgi/mjpg/video.cgi";

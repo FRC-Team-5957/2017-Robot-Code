@@ -2,17 +2,18 @@
 package org.usfirst.frc.team5957.robot;
 
 import org.usfirst.frc.team5957.robot.OI.ControllerType;
-import org.usfirst.frc.team5957.robot.commands.DriveTrainAutonomousGroup;
+import org.usfirst.frc.team5957.robot.commands.AutonomousGroup;
+import org.usfirst.frc.team5957.robot.commands.TeleopArcadeGroup;
+import org.usfirst.frc.team5957.robot.commands.TeleopTankGroup;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainAimAtLift;
-import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainArcadeDrive;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
-import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTankDrive;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTurnToGear;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DrivetrainDriveAndTurn;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DrivetrainDriveForward;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DrivetrainTurn;
 import org.usfirst.frc.team5957.robot.subsystems.Door;
 import org.usfirst.frc.team5957.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5957.robot.subsystems.GearDrive;
 import org.usfirst.frc.team5957.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -35,6 +36,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static Vision vision = new Vision();
 	public static Door door = new Door();
+	public static GearDrive gearDrive = new GearDrive();
 
 	Command teleopCommand;
 	Command autonomousCommand;
@@ -50,6 +52,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		driveTrain.init();
 		door.init();
+		gearDrive.init();
 
 		joystick = new SendableChooser<ControllerType>();
 		joystick.addObject("Gamepad", ControllerType.kGamepad);
@@ -57,7 +60,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Joystick Choice", joystick);
 
 		autoChooser = new SendableChooser<Command>();
-		autoChooser.addDefault("Drive to Lift", new DriveTrainAutonomousGroup());
+		autoChooser.addDefault("Drive to Lift", new AutonomousGroup());
 		autoChooser.addObject("Turn 90 Degrees", new DrivetrainTurn());
 		autoChooser.addObject("Turn 90 Degrees right", new DrivetrainTurn(-90));
 		autoChooser.addObject("Turn 360 Degrees", new DrivetrainTurn(360));
@@ -70,8 +73,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", autoChooser);
 
 		teleChooser = new SendableChooser<Command>();
-		teleChooser.addDefault("Arcade Drive", new DriveTrainArcadeDrive());
-		teleChooser.addObject("Tank Drive", new DriveTrainTankDrive());
+		teleChooser.addDefault("Arcade Drive", new TeleopArcadeGroup());
+		teleChooser.addObject("Tank Drive", new TeleopTankGroup());
 		teleChooser.addObject("Brake", new DriveTrainBrake());
 		SmartDashboard.putData("Tele Mode", teleChooser);
 	}

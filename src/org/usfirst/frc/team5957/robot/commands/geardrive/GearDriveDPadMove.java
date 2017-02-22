@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5957.robot.commands.door;
+package org.usfirst.frc.team5957.robot.commands.geardrive;
 
 import org.usfirst.frc.team5957.robot.Robot;
 
@@ -7,24 +7,24 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DoorDPadMove extends Command {
+public class GearDriveDPadMove extends Command {
 
-	public DoorDPadMove() {
-		requires(Robot.door);
+	public GearDriveDPadMove() {
+		requires(Robot.gearDrive);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.door.stop();
+		Robot.gearDrive.stop();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		int angle = Robot.oi.leftStick.getPOV();
-		if ((angle >= 0 && angle < 90) || (angle > 270 && angle <= 360)) {
-			Robot.door.set(1.0);
-		} else if (angle > 90 && angle < 270) {
-			Robot.door.set(-1.0);
+		if (angle > 0  && angle < 180) {
+			Robot.gearDrive.set(1.0);
+		} else if (angle > 180 && angle < 360) {
+			Robot.gearDrive.set(-1.0);
 		}
 
 	}
@@ -36,12 +36,12 @@ public class DoorDPadMove extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.door.stop();
+		Robot.gearDrive.stop();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		Robot.door.stop();
+		Robot.gearDrive.stop();
 	}
 }

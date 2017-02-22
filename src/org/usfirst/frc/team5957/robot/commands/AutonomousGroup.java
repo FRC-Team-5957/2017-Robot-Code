@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class DriveTrainAutonomousGroup extends CommandGroup {
+public class AutonomousGroup extends CommandGroup {
 
-    public DriveTrainAutonomousGroup() {
+    public AutonomousGroup() {
         addSequential(new DrivetrainDriveForward(3.88));
         addSequential(new DrivetrainTurn(-60));
         addSequential(new DrivetrainDriveForward(0.99));

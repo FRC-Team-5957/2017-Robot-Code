@@ -25,7 +25,7 @@ public class Door extends Subsystem {
 	}
 
 	/**
-	 * Sets the door motor's power.
+	 * Sets the door motor's speed.
 	 * @param speed Speed value from -1.0 to 1.0.
 	 */
 	public void set(double speed) {
