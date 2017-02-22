@@ -13,13 +13,13 @@ public class RobotMap {
 	public static final int RIGHT_FRONT_MOTOR = 3;
 	public static final int LEFT_BACK_MOTOR = 0;
 	public static final int RIGHT_BACK_MOTOR = 2;
-	public static final int DOOR_MOTOR = 4;
-	public static final int GEAR_DRIVE = 5;
+	public static final int DOOR_MOTOR = 9;
+	public static final int GEAR_DRIVE = 8;
 
-	// Axis Camera Stream URL
-	public static final String cameraURL = "http://10.59.57.19/axis-cgi/mjpg/video.cgi";
+	// Axis Camera
+	public static final String CAMERA_URL = "http://10.59.57.19/axis-cgi/mjpg/video.cgi";
 
-	// DI/O Ports
-	public static final int doorLimit = 0;
+	// Digital I/O Ports
+	public static final int DOOR_LIMIT = 0;
 
 }

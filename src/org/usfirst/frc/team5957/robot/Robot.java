@@ -5,12 +5,11 @@ import org.usfirst.frc.team5957.robot.OI.ControllerType;
 import org.usfirst.frc.team5957.robot.commands.AutonomousGroup;
 import org.usfirst.frc.team5957.robot.commands.TeleopArcadeGroup;
 import org.usfirst.frc.team5957.robot.commands.TeleopTankGroup;
+import org.usfirst.frc.team5957.robot.commands.door.DoorOpen;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainAimAtLift;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTurnToGear;
-import org.usfirst.frc.team5957.robot.commands.drivetrain.DrivetrainDriveAndTurn;
-import org.usfirst.frc.team5957.robot.commands.drivetrain.DrivetrainDriveForward;
-import org.usfirst.frc.team5957.robot.commands.drivetrain.DrivetrainTurn;
+import org.usfirst.frc.team5957.robot.commands.geardrive.GearDriveExtend;
 import org.usfirst.frc.team5957.robot.subsystems.Door;
 import org.usfirst.frc.team5957.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5957.robot.subsystems.GearDrive;
@@ -60,16 +59,13 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Joystick Choice", joystick);
 
 		autoChooser = new SendableChooser<Command>();
-		autoChooser.addDefault("Drive to Lift", new AutonomousGroup());
-		autoChooser.addObject("Turn 90 Degrees", new DrivetrainTurn());
-		autoChooser.addObject("Turn 90 Degrees right", new DrivetrainTurn(-90));
-		autoChooser.addObject("Turn 360 Degrees", new DrivetrainTurn(360));
-		autoChooser.addObject("Drive 10 seconds", new DrivetrainDriveForward());
-		autoChooser.addObject("Drive 5 seconds", new DrivetrainDriveForward(5));
-		autoChooser.addObject("Drive 1 second", new DrivetrainDriveForward(1));
+		autoChooser.addDefault("Perform Autonomous", new AutonomousGroup());
+		autoChooser.addObject("Open Door", new DoorOpen());
+		autoChooser.addObject("Open Door - Half Speed", new DoorOpen(0.5));
+		autoChooser.addObject("Extend Gear", new GearDriveExtend());
+		autoChooser.addObject("Extend Gear - Half Speed", new GearDriveExtend(3.0, 0.5));
 		autoChooser.addObject("Turn towards Gear", new DriveTrainTurnToGear());
 		autoChooser.addObject("Turn towards Lift", new DriveTrainAimAtLift());
-		autoChooser.addObject("Drive & Turn", new DrivetrainDriveAndTurn());
 		SmartDashboard.putData("Auto mode", autoChooser);
 
 		teleChooser = new SendableChooser<Command>();

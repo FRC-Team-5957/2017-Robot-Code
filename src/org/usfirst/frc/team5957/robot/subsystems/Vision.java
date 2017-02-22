@@ -32,7 +32,7 @@ public class Vision extends Subsystem {
 		retrotapeTable = visionTable.getSubTable("Retrotape");
 		gearTable = visionTable.getSubTable("Gear");
 		ITable axisCamera = visionTable.getSubTable("Axis 5957");
-		axisCamera.putStringArray("streams", new String[] { RobotMap.cameraURL });
+		axisCamera.putStringArray("streams", new String[] { RobotMap.CAMERA_URL });
 	}
 
 	public void initDefaultCommand() {

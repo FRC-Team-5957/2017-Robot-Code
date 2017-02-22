@@ -40,12 +40,12 @@ public class OI {
 
 	public OI() {
 		gyro = new ADXRS450_Gyro();
-		doorLimit = new LimitSwitch(RobotMap.doorLimit);
+		doorLimit = new LimitSwitch(RobotMap.DOOR_LIMIT);
 
 		buttonThree.whenPressed(new DriveTrainTankDrive());
 		buttonFour.whenPressed(new DriveTrainArcadeDrive());
 		buttonFive.whenPressed(new DriveTrainBrake());
-		doorLimit.whenActive(new DoorHold());
+		doorLimit.whenActive(new DoorHold()); // TODO: Make door close once implemented.
 	}
 
 	/**
