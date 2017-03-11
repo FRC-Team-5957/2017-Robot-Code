@@ -20,6 +20,7 @@ public class RobotMap {
 	public static final String CAMERA_URL = "http://10.59.57.19/axis-cgi/mjpg/video.cgi";
 
 	// Digital I/O Ports
-	public static final int DOOR_LIMIT = 0;
+	public static final int DOOR_OPEN = 0;
+	public static final int DOOR_CLOSE = 1;
 
 }

@@ -1,11 +1,11 @@
 
 package org.usfirst.frc.team5957.robot;
 
-import org.usfirst.frc.team5957.robot.OI.ControllerType;
+import org.usfirst.frc.team5957.robot.OI.ControlScheme;
 import org.usfirst.frc.team5957.robot.commands.AutonomousGroup;
 import org.usfirst.frc.team5957.robot.commands.TeleopArcadeGroup;
 import org.usfirst.frc.team5957.robot.commands.TeleopTankGroup;
-import org.usfirst.frc.team5957.robot.commands.door.DoorOpen;
+import org.usfirst.frc.team5957.robot.commands.door.DoorMove;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainAimAtLift;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTurnToGear;
@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 
 	Command teleopCommand;
 	Command autonomousCommand;
-	SendableChooser<ControllerType> joystick;
+	SendableChooser<ControlScheme> joystick;
 	SendableChooser<Command> autoChooser;
 	SendableChooser<Command> teleChooser;
 
@@ -53,15 +53,18 @@ public class Robot extends IterativeRobot {
 		door.init();
 		gearDrive.init();
 
-		joystick = new SendableChooser<ControllerType>();
-		joystick.addObject("Gamepad", ControllerType.kGamepad);
-		joystick.addDefault("Flight Sticks", ControllerType.kFlightStick);
+		joystick = new SendableChooser<ControlScheme>();
+		joystick.addObject("Gamepad - Two Drivers", ControlScheme.kGamepadTwoDrivers);
+		joystick.addObject("Flight Sticks - Two Drivers", ControlScheme.kFlightStickTwoDrivers);
+		joystick.addObject("Gamepad - One Driver", ControlScheme.kGamepadOneDriver);
+		joystick.addDefault("Flight Sticks - One Driver", ControlScheme.kFlightStickOneDriver);
+		
 		SmartDashboard.putData("Joystick Choice", joystick);
 
 		autoChooser = new SendableChooser<Command>();
 		autoChooser.addDefault("Perform Autonomous", new AutonomousGroup());
-		autoChooser.addObject("Open Door", new DoorOpen());
-		autoChooser.addObject("Open Door - Half Speed", new DoorOpen(0.5));
+		autoChooser.addObject("Open Door", new DoorMove());
+		autoChooser.addObject("Open Door - Half Speed", new DoorMove(0.5));
 		autoChooser.addObject("Extend Gear", new GearDriveExtend());
 		autoChooser.addObject("Extend Gear - Half Speed", new GearDriveExtend(3.0, 0.5));
 		autoChooser.addObject("Turn towards Gear", new DriveTrainTurnToGear());

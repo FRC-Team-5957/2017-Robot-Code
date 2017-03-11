@@ -1,7 +1,9 @@
 package org.usfirst.frc.team5957.robot.commands.door;
 
+import org.usfirst.frc.team5957.robot.OI;
 import org.usfirst.frc.team5957.robot.Robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -20,13 +22,17 @@ public class DoorDPadMove extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		int angle = Robot.oi.leftStick.getPOV();
+		boolean singleDriver = (Robot.oi.joystick == OI.ControlScheme.kFlightStickOneDriver
+				|| Robot.oi.joystick == OI.ControlScheme.kGamepadOneDriver);
+		Joystick stick = singleDriver ? Robot.oi.leftStick : Robot.oi.rightStick;
+		int angle = stick.getPOV();
+
+		// The DPad angles start at 0 in the up direction, and increase clockwise
 		if ((angle >= 0 && angle < 90) || (angle > 270 && angle <= 360)) {
 			Robot.door.set(1.0);
 		} else if (angle > 90 && angle < 270) {
 			Robot.door.set(-1.0);
 		}
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

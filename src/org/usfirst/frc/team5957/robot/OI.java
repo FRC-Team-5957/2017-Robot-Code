@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team5957.robot.commands.door.DoorHold;
+import org.usfirst.frc.team5957.robot.commands.door.DoorMove;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainArcadeDrive;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTankDrive;
@@ -24,7 +24,7 @@ public class OI {
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
 
-	public ControllerType joystick = ControllerType.kFlightStick;
+	public ControlScheme joystick = ControlScheme.kFlightStickOneDriver;
 
 	public Joystick leftStick = new Joystick(0);
 	public Joystick rightStick = new Joystick(1);
@@ -36,16 +36,19 @@ public class OI {
 	Button[] buttons = new Button[] { buttonThree, buttonFour, buttonFive, buttonNine, buttonTen };
 	// Sensors
 	public Gyro gyro;
-	public DigitalTrigger doorLimit;
+	public DigitalTrigger doorOpened;
+	public DigitalTrigger doorClosed;
 
 	public OI() {
 		gyro = new ADXRS450_Gyro();
-		doorLimit = new DigitalTrigger(RobotMap.DOOR_LIMIT);
+		doorOpened = new DigitalTrigger(RobotMap.DOOR_OPEN);
+		doorClosed = new DigitalTrigger(RobotMap.DOOR_CLOSE);
 
 		buttonThree.whenPressed(new DriveTrainTankDrive());
 		buttonFour.whenPressed(new DriveTrainArcadeDrive());
 		buttonFive.whenPressed(new DriveTrainBrake());
-		doorLimit.whenActive(new DoorHold()); // TODO: Make door close once implemented.
+		doorClosed.whileActive(new DoorMove(0.5));
+		doorOpened.whileActive(new DoorMove(-0.5));
 	}
 
 	/**
@@ -58,24 +61,24 @@ public class OI {
 	}
 
 	/**
-	 * Changes control scheme if the argument {@code joystickType} is different from
-	 * the OI's field {@code joystickType}.
+	 * Changes control scheme if the argument {@code joystickType} is different
+	 * from the OI's field {@code joystickType}.
 	 * 
 	 * @param joystickType
 	 *            The desired control scheme.
 	 */
-	public void changeJoystick(ControllerType joystickType) {
+	public void changeJoystick(ControlScheme joystickType) {
 		if (this.joystick != joystickType) {
 			this.joystick = joystickType;
 		}
 	}
 
-	public enum ControllerType {
-		kFlightStick(0), kGamepad(1);
+	public enum ControlScheme {
+		kFlightStickOneDriver(0), kGamepadOneDriver(1), kFlightStickTwoDrivers(2), kGamepadTwoDrivers(3);
 
 		public final int value;
 
-		private ControllerType(int value) {
+		private ControlScheme(int value) {
 			this.value = value;
 		}
 	}

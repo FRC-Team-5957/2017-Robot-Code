@@ -1,7 +1,9 @@
 package org.usfirst.frc.team5957.robot.commands.geardrive;
 
+import org.usfirst.frc.team5957.robot.OI;
 import org.usfirst.frc.team5957.robot.Robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -20,7 +22,11 @@ public class GearDriveDPadMove extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		int angle = Robot.oi.leftStick.getPOV();
+		boolean singleDriver = (Robot.oi.joystick == OI.ControlScheme.kFlightStickOneDriver
+				|| Robot.oi.joystick == OI.ControlScheme.kGamepadOneDriver);
+		Joystick stick = singleDriver ? Robot.oi.leftStick : Robot.oi.rightStick;
+		int angle = stick.getPOV();
+		
 		if (angle > 0  && angle < 180) {
 			Robot.gearDrive.set(1.0);
 		} else if (angle > 180 && angle < 360) {
