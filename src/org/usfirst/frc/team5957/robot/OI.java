@@ -2,15 +2,10 @@ package org.usfirst.frc.team5957.robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5957.robot.commands.door.DoorMove;
-import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainArcadeDrive;
-import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
-import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTankDrive;
 import org.usfirst.frc.team5957.robot.triggers.DigitalTrigger;
 
 /**
@@ -28,12 +23,7 @@ public class OI {
 
 	public Joystick leftStick = new Joystick(0);
 	public Joystick rightStick = new Joystick(1);
-	Button buttonThree = new JoystickButton(leftStick, 3);
-	Button buttonFour = new JoystickButton(leftStick, 4);
-	Button buttonFive = new JoystickButton(leftStick, 5);
-	Button buttonNine = new JoystickButton(leftStick, 9);
-	Button buttonTen = new JoystickButton(leftStick, 10);
-	Button[] buttons = new Button[] { buttonThree, buttonFour, buttonFive, buttonNine, buttonTen };
+
 	// Sensors
 	public Gyro gyro;
 	public DigitalTrigger doorOpened;
@@ -44,9 +34,6 @@ public class OI {
 		doorOpened = new DigitalTrigger(RobotMap.DOOR_OPEN);
 		doorClosed = new DigitalTrigger(RobotMap.DOOR_CLOSE);
 
-		buttonThree.whenPressed(new DriveTrainTankDrive());
-		buttonFour.whenPressed(new DriveTrainArcadeDrive());
-		buttonFive.whenPressed(new DriveTrainBrake());
 		doorClosed.whileActive(new DoorMove(0.5));
 		doorOpened.whileActive(new DoorMove(-0.5));
 	}

@@ -10,10 +10,12 @@ import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainAimAtLift;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTurnToGear;
 import org.usfirst.frc.team5957.robot.commands.geardrive.GearDriveExtend;
+import org.usfirst.frc.team5957.robot.commands.winch.WinchClimb;
 import org.usfirst.frc.team5957.robot.subsystems.Door;
 import org.usfirst.frc.team5957.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5957.robot.subsystems.GearDrive;
 import org.usfirst.frc.team5957.robot.subsystems.Vision;
+import org.usfirst.frc.team5957.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,6 +38,7 @@ public class Robot extends IterativeRobot {
 	public static Vision vision = new Vision();
 	public static Door door = new Door();
 	public static GearDrive gearDrive = new GearDrive();
+	public static Winch winch = new Winch();
 
 	Command teleopCommand;
 	Command autonomousCommand;
@@ -58,7 +61,6 @@ public class Robot extends IterativeRobot {
 		joystick.addObject("Flight Sticks - Two Drivers", ControlScheme.kFlightStickTwoDrivers);
 		joystick.addObject("Gamepad - One Driver", ControlScheme.kGamepadOneDriver);
 		joystick.addDefault("Flight Sticks - One Driver", ControlScheme.kFlightStickOneDriver);
-		
 		SmartDashboard.putData("Joystick Choice", joystick);
 
 		autoChooser = new SendableChooser<Command>();
@@ -67,6 +69,8 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Open Door - Half Speed", new DoorMove(0.5));
 		autoChooser.addObject("Extend Gear", new GearDriveExtend());
 		autoChooser.addObject("Extend Gear - Half Speed", new GearDriveExtend(3.0, 0.5));
+		autoChooser.addObject("Climb with Winch", new WinchClimb());
+		autoChooser.addObject("Climb with Winch - Half Speed", new GearDriveExtend(3.0, 0.5));
 		autoChooser.addObject("Turn towards Gear", new DriveTrainTurnToGear());
 		autoChooser.addObject("Turn towards Lift", new DriveTrainAimAtLift());
 		SmartDashboard.putData("Auto mode", autoChooser);
