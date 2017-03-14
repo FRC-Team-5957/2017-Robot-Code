@@ -31,7 +31,7 @@ public class DriveTrainArcadeDrive extends Command {
 		if (Robot.oi.joystick == ControlScheme.kGamepadOneDriver
 				|| Robot.oi.joystick == ControlScheme.kGamepadTwoDrivers) {
 			forward = -Robot.oi.leftStick.getRawAxis(1); // left y
-			turn = -Robot.oi.leftStick.getRawAxis(0); // left y
+			turn = -Robot.oi.leftStick.getRawAxis(0); // left x
 		} else if (Robot.oi.joystick == ControlScheme.kFlightStickOneDriver
 				|| Robot.oi.joystick == ControlScheme.kFlightStickTwoDrivers) {
 			forward = -Robot.oi.leftStick.getY();
