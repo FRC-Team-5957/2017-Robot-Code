@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5957.robot.subsystems;
 
-import org.usfirst.frc.team5957.robot.RobotMap;
+import static org.usfirst.frc.team5957.robot.RobotMap.*;
 import org.usfirst.frc.team5957.robot.commands.geardrive.GearDriveStop;
 
 import edu.wpi.first.wpilibj.VictorSP;
@@ -21,7 +21,7 @@ public class GearDrive extends Subsystem {
 	 * Robot.robotInit()}.
 	 */
 	public void init() {
-		m_driveMotor = new VictorSP(RobotMap.GEAR_DRIVE);
+		m_driveMotor = new VictorSP(GEAR_DRIVE);
 	}
 	
 	/**

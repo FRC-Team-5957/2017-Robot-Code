@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5957.robot.subsystems;
 
-import org.usfirst.frc.team5957.robot.RobotMap;
+import static org.usfirst.frc.team5957.robot.RobotMap.*;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
 
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -26,10 +26,10 @@ public class DriveTrain extends Subsystem {
 	 * Robot.robotInit()}.
 	 */
 	public void init() {
-		m_leftFront = new VictorSP(RobotMap.LEFT_FRONT_MOTOR);
-		m_rightFront = new VictorSP(RobotMap.RIGHT_FRONT_MOTOR);
-		m_leftBack = new VictorSP(RobotMap.LEFT_BACK_MOTOR);
-		m_rightBack = new VictorSP(RobotMap.RIGHT_BACK_MOTOR);
+		m_leftFront = new VictorSP(LEFT_FRONT_MOTOR);
+		m_rightFront = new VictorSP(RIGHT_FRONT_MOTOR);
+		m_leftBack = new VictorSP(LEFT_BACK_MOTOR);
+		m_rightBack = new VictorSP(RIGHT_BACK_MOTOR);
 
 		roboDrive = new RobotDrive(m_leftFront, m_leftBack, m_rightFront, m_rightBack);
 	}

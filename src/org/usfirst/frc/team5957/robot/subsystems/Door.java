@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5957.robot.subsystems;
 
-import org.usfirst.frc.team5957.robot.RobotMap;
+import static org.usfirst.frc.team5957.robot.RobotMap.*;
 import org.usfirst.frc.team5957.robot.commands.door.DoorHold;
 
 import edu.wpi.first.wpilibj.VictorSP;
@@ -21,7 +21,7 @@ public class Door extends Subsystem {
 	 * Robot.robotInit()}.
 	 */
 	public void init() {
-		m_doorMotor = new VictorSP(RobotMap.DOOR_MOTOR);
+		m_doorMotor = new VictorSP(DOOR_MOTOR);
 	}
 
 	/**
