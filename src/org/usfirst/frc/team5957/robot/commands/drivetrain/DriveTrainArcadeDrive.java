@@ -22,6 +22,18 @@ public class DriveTrainArcadeDrive extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		String oldControls = SmartDashboard.getString("Controls", "");
+		String cont = "";
+		if (Robot.oi.joystick == ControlScheme.kFlightStickOneDriver
+				|| Robot.oi.joystick == ControlScheme.kFlightStickTwoDrivers) {
+			cont = "Move Forwards/Backwards: Stick 1 Forwards/Backwards\n"
+				 + "Turn Left/Right: Stick 1 Left/Right\n";
+		} else if (Robot.oi.joystick == ControlScheme.kGamepadOneDriver
+				|| Robot.oi.joystick == ControlScheme.kGamepadTwoDrivers) {
+			cont = "Move Forwards/Backwards: Gamepad 1 Left Stick Forwards/Backwards\n"
+				 + "Turn Left/Right: Gamepad 1 Left Stick Left/Right\n";
+		}
+		SmartDashboard.putString("Controls", oldControls + cont);
 		Robot.driveTrain.brake();
 	}
 
@@ -32,10 +44,14 @@ public class DriveTrainArcadeDrive extends Command {
 
 		if (Robot.oi.joystick == ControlScheme.kGamepadOneDriver
 				|| Robot.oi.joystick == ControlScheme.kGamepadTwoDrivers) {
+			// If using (a) game pad(s), get the X and Y from the left stick of
+			// the first plugged in controller.
 			forward = -Robot.oi.leftStick.getRawAxis(1); // left y
 			turn = -Robot.oi.leftStick.getRawAxis(0); // left x
 		} else if (Robot.oi.joystick == ControlScheme.kFlightStickOneDriver
 				|| Robot.oi.joystick == ControlScheme.kFlightStickTwoDrivers) {
+			// If using (a) flight stick(s), get the X and Y from the first one
+			// plugged in.
 			forward = -Robot.oi.leftStick.getY();
 			turn = -Robot.oi.leftStick.getX();
 		} else {

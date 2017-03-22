@@ -22,6 +22,17 @@ public class DriveTrainTankDrive extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		String oldControls = SmartDashboard.getString("Controls", "");
+		String cont = "";
+		if (Robot.oi.joystick == ControlScheme.kFlightStickOneDriver) {
+			cont = "Left Side: Stick 1 Forwards/Backwards\n"
+				 + "Right Side: Stick 2 Forwards/Backwards\n";
+		} else if (Robot.oi.joystick == ControlScheme.kGamepadOneDriver
+				|| Robot.oi.joystick == ControlScheme.kGamepadTwoDrivers) {
+			cont = "Left Side: Gamepad 1 Left Stick Forwards/Backwards\n"
+				 + "Right Side: Gamepad 1 Right Stick Forwards/Backwards\n";
+		}
+		SmartDashboard.putString("Controls", oldControls + cont);
 		Robot.driveTrain.brake();
 	}
 
