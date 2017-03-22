@@ -5,13 +5,11 @@ import org.usfirst.frc.team5957.robot.OI.ControlScheme;
 import org.usfirst.frc.team5957.robot.commands.AutonomousGroup;
 import org.usfirst.frc.team5957.robot.commands.TeleopArcadeGroup;
 import org.usfirst.frc.team5957.robot.commands.TeleopTankGroup;
-import org.usfirst.frc.team5957.robot.commands.door.DoorMove;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainAimAtLift;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainBrake;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTurnToGear;
 import org.usfirst.frc.team5957.robot.commands.geardrive.GearDriveExtend;
 import org.usfirst.frc.team5957.robot.commands.winch.WinchClimb;
-import org.usfirst.frc.team5957.robot.subsystems.Door;
 import org.usfirst.frc.team5957.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5957.robot.subsystems.GearDrive;
 import org.usfirst.frc.team5957.robot.subsystems.Vision;
@@ -36,7 +34,6 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static Vision vision = new Vision();
-	public static Door door = new Door();
 	public static GearDrive gearDrive = new GearDrive();
 	public static Winch winch = new Winch();
 
@@ -53,7 +50,6 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		driveTrain.init();
-		door.init();
 		gearDrive.init();
 
 		joystick = new SendableChooser<ControlScheme>();
@@ -65,8 +61,6 @@ public class Robot extends IterativeRobot {
 
 		autoChooser = new SendableChooser<Command>();
 		autoChooser.addDefault("Perform Autonomous", new AutonomousGroup());
-		autoChooser.addObject("Open Door", new DoorMove());
-		autoChooser.addObject("Open Door - Half Speed", new DoorMove(0.5));
 		autoChooser.addObject("Extend Gear", new GearDriveExtend());
 		autoChooser.addObject("Extend Gear - Half Speed", new GearDriveExtend(3.0, 0.5));
 		autoChooser.addObject("Climb with Winch", new WinchClimb());

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5957.robot.commands;
 
-import org.usfirst.frc.team5957.robot.commands.door.DoorDPadMove;
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainArcadeDrive;
 import org.usfirst.frc.team5957.robot.commands.geardrive.GearDriveDPadMove;
 import org.usfirst.frc.team5957.robot.commands.winch.WinchTeleMove;
@@ -17,7 +16,6 @@ public class TeleopArcadeGroup extends CommandGroup {
 		addParallel(new DriveTrainArcadeDrive());
 		addParallel(new GearDriveDPadMove());
 		addParallel(new WinchTeleMove());
-		addSequential(new DoorDPadMove());
 	}
 
 }

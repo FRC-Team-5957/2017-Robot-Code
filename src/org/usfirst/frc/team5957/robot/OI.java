@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team5957.robot.commands.door.DoorMove;
 import org.usfirst.frc.team5957.robot.triggers.DigitalTrigger;
 
 /**
@@ -26,16 +24,9 @@ public class OI {
 
 	// Sensors
 	public Gyro gyro;
-	public DigitalTrigger doorOpened;
-	public DigitalTrigger doorClosed;
 
 	public OI() {
 		gyro = new ADXRS450_Gyro();
-		doorOpened = new DigitalTrigger(RobotMap.DOOR_OPEN);
-		doorClosed = new DigitalTrigger(RobotMap.DOOR_CLOSE);
-
-		doorClosed.whileActive(new DoorMove(0.5));
-		doorOpened.whileActive(new DoorMove(-0.5));
 	}
 
 	/**
