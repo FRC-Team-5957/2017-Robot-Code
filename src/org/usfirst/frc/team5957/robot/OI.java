@@ -11,14 +11,13 @@ import org.usfirst.frc.team5957.robot.triggers.DigitalTrigger;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
 
+	/**
+	 * The current ControlScheme being used by the driver(s).
+	 */
 	public ControlScheme joystick = ControlScheme.kFlightStickOneDriver;
 
+	// Ports for Joysticks/Controllers
 	public Joystick leftStick = new Joystick(0);
 	public Joystick rightStick = new Joystick(1);
 
@@ -31,8 +30,11 @@ public class OI {
 
 	/**
 	 * Pushes sensor data to the SmartDashboard.
+	 * 
+	 * @author Jakob Burgos
 	 */
 	public void dashboardUpdate() {
+		// Robot.vision.updateDashboard();
 		SmartDashboard.putNumber("Left Y", leftStick.getY());
 		SmartDashboard.putNumber("Left X", leftStick.getX());
 		SmartDashboard.putNumber("Gyro", gyro.getAngle());
@@ -44,6 +46,8 @@ public class OI {
 	 * 
 	 * @param joystickType
 	 *            The desired control scheme.
+	 * 
+	 * @author Jakob Burgos
 	 */
 	public void changeJoystick(ControlScheme joystickType) {
 		if (this.joystick != joystickType) {
@@ -51,6 +55,11 @@ public class OI {
 		}
 	}
 
+	/**
+	 * Enum holding possible methods of controlling the robot.
+	 * 
+	 * @author Jakob Burgos
+	 */
 	public enum ControlScheme {
 		kFlightStickOneDriver(0), kGamepadOneDriver(1), kFlightStickTwoDrivers(2), kGamepadTwoDrivers(3);
 

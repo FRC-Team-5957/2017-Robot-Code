@@ -27,9 +27,9 @@ public class GearDriveDPadMove extends Command {
 		Joystick stick = singleDriver ? Robot.oi.leftStick : Robot.oi.rightStick;
 		int angle = stick.getPOV();
 		
-		if (angle > 0  && angle < 180) {
+		if (stick.getRawButton(10)) {
 			Robot.gearDrive.set(1.0);
-		} else if (angle > 180 && angle < 360) {
+		} else if (stick.getRawButton(12)) {
 			Robot.gearDrive.set(-1.0);
 		}
 
