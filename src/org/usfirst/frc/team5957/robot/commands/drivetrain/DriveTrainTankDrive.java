@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * A command that takes two joysticks' vertical values and drives the robot with
  * them.
+ * 
+ * @author Jakob Burgos
  */
 public class DriveTrainTankDrive extends Command {
 

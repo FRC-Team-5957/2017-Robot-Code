@@ -5,7 +5,9 @@ import org.usfirst.frc.team5957.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Stops the winch from moving.
+ * 
+ * @author Austen Gralheer
  */
 public class WinchStop extends Command {
 

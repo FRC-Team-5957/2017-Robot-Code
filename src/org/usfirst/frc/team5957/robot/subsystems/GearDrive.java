@@ -16,7 +16,7 @@ public class GearDrive extends Subsystem {
 	private VictorSP m_driveMotor;
 
 	/**
-	 * Initializes the robot's screw drive. Call in
+	 * Initializes the robot's screw drive. Called in
 	 * {@link org.usfirst.frc.team5957.robot.Robot#robotInit()
 	 * Robot.robotInit()}.
 	 */

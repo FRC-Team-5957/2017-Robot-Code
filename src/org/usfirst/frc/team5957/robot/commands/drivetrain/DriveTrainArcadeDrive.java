@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * A command that takes one joystick's vertical and horizontal values and drives
  * the robot with them.
+ * 
+ * @author Jakob Burgos
  */
 public class DriveTrainArcadeDrive extends Command {
 

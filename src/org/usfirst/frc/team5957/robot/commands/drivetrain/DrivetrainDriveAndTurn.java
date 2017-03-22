@@ -3,29 +3,19 @@ package org.usfirst.frc.team5957.robot.commands.drivetrain;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
+ * Test autonomous command.
+ * 
+ * @deprecated No longer needed for testing.
+ * 
+ * @author Corin Winston
  *
  */
 public class DrivetrainDriveAndTurn extends CommandGroup {
 
-    public DrivetrainDriveAndTurn() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
+	public DrivetrainDriveAndTurn() {
 
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
-    	addSequential(new DrivetrainDriveForward(5));
-    	addSequential(new DrivetrainTurn());
-    	addSequential(new DrivetrainDriveForward(3));
-    }
+		addSequential(new DrivetrainDriveForward(5));
+		addSequential(new DrivetrainTurn());
+		addSequential(new DrivetrainDriveForward(3));
+	}
 }

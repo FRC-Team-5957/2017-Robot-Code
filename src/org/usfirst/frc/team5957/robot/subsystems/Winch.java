@@ -17,7 +17,7 @@ public class Winch extends Subsystem {
 	private VictorSP m_driveMotor;
 
 	/**
-	 * Initializes the robot's winch. Call in
+	 * Initializes the robot's winch. Called in
 	 * {@link org.usfirst.frc.team5957.robot.Robot#robotInit()
 	 * Robot.robotInit()}.
 	 */

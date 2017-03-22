@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * Full tele-operation command. Controls drive train in arcade scheme. Controls
- * door with D-Pad.
+ * winch by holding trigger or left bumper and moving (left) stick.
  */
 public class TeleopTankGroup extends CommandGroup {
 

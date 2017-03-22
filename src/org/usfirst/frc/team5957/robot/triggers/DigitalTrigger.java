@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 /**
  * This is a trigger created to model a digital input, specifically a limit
  * switch.
+ * 
+ * @author Jakob Burgos
  */
 public class DigitalTrigger extends Trigger {
 

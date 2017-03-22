@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Command that pushes or pulls a gear with the screw conveyor. By default,
  * expires after 3 seconds and pushes at full speed.
+ * 
+ * @author Jakob Burgos
  */
 public class GearDriveExtend extends Command {
 

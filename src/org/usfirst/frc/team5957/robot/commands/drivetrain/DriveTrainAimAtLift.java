@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * A command that turns towards a lift, using the camera and the retroreflective
  * tape one either side of the lift.
+ * 
+ * @author Jakob Burgos
  */
 public class DriveTrainAimAtLift extends Command {
 

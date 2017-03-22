@@ -2,8 +2,6 @@ package org.usfirst.frc.team5957.robot.subsystems;
 
 import static org.usfirst.frc.team5957.robot.RobotMap.*;
 
-import org.usfirst.frc.team5957.robot.Robot;
-
 import edu.wpi.cscore.HttpCamera;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;

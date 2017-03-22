@@ -5,15 +5,15 @@ import org.usfirst.frc.team5957.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Drives the robot at the power given in the constructor. Default 25%.
+ * 
+ * @author Jakob Burgos
  */
 public class DriveTrainDriveAtPower extends Command {
 
 	double power = 0.25;
 	
     public DriveTrainDriveAtPower() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.driveTrain);
     }
     
