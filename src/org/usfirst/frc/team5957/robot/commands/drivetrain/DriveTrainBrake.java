@@ -1,10 +1,12 @@
-package org.usfirst.frc.team5957.robot.commands;
+package org.usfirst.frc.team5957.robot.commands.drivetrain;
 
 import org.usfirst.frc.team5957.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Stops the drive train from moving.
+ * 
+ * @author Jakob Burgos
  */
 public class DriveTrainBrake extends Command {
 
