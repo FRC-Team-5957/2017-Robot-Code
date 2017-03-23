@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5957.robot.commands.winch;
+package org.usfirst.frc.team5957.robot.commands.geardrive;
 
 import org.usfirst.frc.team5957.robot.OI;
 import org.usfirst.frc.team5957.robot.Robot;
@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Command for controlling the winch during teleop.
+ * Command for controlling the gear coil during teleop.
  */
-public class WinchTeleMove extends Command {
+public class GearDriveTeleMove extends Command {
 
-	public WinchTeleMove() {
-		requires(Robot.winch);
+	public GearDriveTeleMove() {
+		requires(Robot.gearDrive);
 	}
 
 	// Called just before this Command runs the first time
@@ -22,20 +22,20 @@ public class WinchTeleMove extends Command {
 		String oldControls = SmartDashboard.getString("Controls", "");
 		String cont = "";
 		if (Robot.oi.joystick == ControlScheme.kFlightStickOneDriver) {
-			cont = "Winch Reel In: Stick 1 Button 3\n"
-					+ "Winch Unreel: Stick 1 Button 5\n";
+			cont = "Extend Coil: Stick 1 Button 2\n"
+					+ "Retract Coil: Stick 1 Button 4\n";
 		} else if (Robot.oi.joystick == ControlScheme.kGamepadOneDriver) {
-			cont = "Winch Reel In: Gamepad 1 Left Trigger (Variable Speed)\n"
-					+ "Winch Unreel: Gamepad 1 Left Trigger + Bumper (Variable Speed)\n";
+			cont = "Extend Coil: Gamepad 1 Right Trigger (Variable Speed)\n"
+					+ "Retract Coil: Gamepad 1 Right Trigger + Bumper (Variable Speed)\n";
 		} else if (Robot.oi.joystick == ControlScheme.kFlightStickTwoDrivers) {
-			cont = "Winch Reel In: Stick 2 Button 3\n"
-					+ "Winch Unreel: Stick 2 Button 5\n";
+			cont = "Extend Coil: Stick 2 Button 2\n"
+					+ "Retract Coil: Stick 2 Button 4\n";
 		} else if (Robot.oi.joystick == ControlScheme.kGamepadTwoDrivers) {
-			cont = "Winch Reel In: Gamepad 2 Left Trigger (Variable Speed)\n"
-					+ "Winch Unreel: Gamepad 2 Trigger + Bumper (Variable Speed)\n";
+			cont = "Extend Coil: Gamepad 2 Right Trigger (Variable Speed)\n"
+					+ "Retract Coil: Gamepad 2 Trigger + Bumper (Variable Speed)\n";
 		}
 		SmartDashboard.putString("Controls", oldControls + cont);
-		Robot.winch.stop();
+		Robot.gearDrive.stop();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -47,14 +47,14 @@ public class WinchTeleMove extends Command {
 		
 		Joystick stick = singleDriver ? Robot.oi.leftStick : Robot.oi.rightStick;
 
-		if (flightStick && stick.getRawButton(3)) {
+		if (flightStick && stick.getRawButton(4)) {
 			Robot.winch.set(1);
-		} else if (flightStick && stick.getRawButton(5)) {
+		} else if (flightStick && stick.getRawButton(6)) {
 			Robot.winch.set(-1);
-		} else if (stick.getRawButton(5)) {
-			Robot.winch.set(-stick.getRawAxis(2));
+		} else if (stick.getRawButton(6)) {
+			Robot.winch.set(-stick.getRawAxis(3));
 		} else {
-			Robot.winch.set(stick.getRawAxis(2));
+			Robot.winch.set(stick.getRawAxis(3));
 		}
 
 	}
@@ -66,12 +66,12 @@ public class WinchTeleMove extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.winch.stop();
+		Robot.gearDrive.stop();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		Robot.winch.stop();
+		Robot.gearDrive.stop();
 	}
 }

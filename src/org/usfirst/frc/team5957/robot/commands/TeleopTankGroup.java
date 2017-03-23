@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5957.robot.commands;
 
 import org.usfirst.frc.team5957.robot.commands.drivetrain.DriveTrainTankDrive;
-import org.usfirst.frc.team5957.robot.commands.geardrive.GearDriveDPadMove;
+import org.usfirst.frc.team5957.robot.commands.geardrive.GearDriveTeleMove;
 import org.usfirst.frc.team5957.robot.commands.winch.WinchTeleMove;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -14,7 +14,7 @@ public class TeleopTankGroup extends CommandGroup {
 
 	public TeleopTankGroup() {
 		addParallel(new DriveTrainTankDrive());
-		addParallel(new GearDriveDPadMove());
+		addParallel(new GearDriveTeleMove());
 		addParallel(new WinchTeleMove());
 	}
 

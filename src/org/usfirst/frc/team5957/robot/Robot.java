@@ -2,6 +2,7 @@
 package org.usfirst.frc.team5957.robot;
 
 import org.usfirst.frc.team5957.robot.OI.ControlScheme;
+import org.usfirst.frc.team5957.robot.OI.Location;
 import org.usfirst.frc.team5957.robot.commands.AutonomousGroup;
 import org.usfirst.frc.team5957.robot.commands.TeleopArcadeGroup;
 import org.usfirst.frc.team5957.robot.commands.TeleopTankGroup;
@@ -42,6 +43,7 @@ public class Robot extends IterativeRobot {
 	SendableChooser<ControlScheme> joystick;
 	SendableChooser<Command> autoChooser;
 	SendableChooser<Command> teleChooser;
+	SendableChooser<Location> location;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -51,6 +53,12 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		driveTrain.init();
 		gearDrive.init();
+
+		location = new SendableChooser<Location>();
+		location.addObject("Dead Center", Location.kMiddle);
+		location.addObject("Tape By Enemy Loading Station", Location.kLoadingStationTape);
+		location.addDefault("Tape Near Boiler", Location.kBoilerTape);
+		SmartDashboard.putData("Starting Location", location);
 
 		joystick = new SendableChooser<ControlScheme>();
 		joystick.addObject("Gamepad - Two Drivers", ControlScheme.kGamepadTwoDrivers);
@@ -89,6 +97,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		oi.dashboardUpdate();
 		oi.changeJoystick(joystick.getSelected());
+		oi.changeLocation(location.getSelected());
 	}
 
 	/**
@@ -127,6 +136,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		oi.dashboardUpdate();
 		oi.changeJoystick(joystick.getSelected());
+		oi.changeLocation(location.getSelected());
 	}
 
 	public void teleopInit() {
@@ -150,6 +160,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		oi.dashboardUpdate();
 		oi.changeJoystick(joystick.getSelected());
+		oi.changeLocation(location.getSelected());
 	}
 
 	/**
